@@ -1,3 +1,61 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
+
+class Puser(models.Model):
+	orgname = models.CharField(max_length=100)
+	email = models.EmailField()
+	joineddate = models.DateField()
+	user = models.OneToOneField(User)
+	location = models.CharField(max_length=100)
+	designation = models.CharField(max_length=200)
+	institution = models.CharField(max_length=200)
+
+	def __unicode__(self):
+		return self.orgname
+
+class Query(models.Model):
+	body = models.CharField(max_length=5000)
+	user = models.ForeignKey(Puser)
+	created = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		verbose_name = 'Query'
+		verbose_name_plural = 'Queries'
+		ordering = ["-created"]
+
+class Post(models.Model):
+	body = models.CharField(max_length=5000)
+	user = models.ForeignKey(Puser)
+	created = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		verbose_name = 'Post'
+		verbose_name_plural = 'Posts'
+		ordering = ["-created"]
+
+
+
+class Comment(models.Model):
+	post_id = models.IntegerField()
+	body = models.TextField(null = False)
+	user = models.ForeignKey(Puser)
+	created = models.DateTimeField(auto_now_add=True)
+	
+	def __unicode__(self):
+		return self.body
+
+	class Meta:
+		ordering = ["-created"]
+
+class Answer(models.Model):
+	post_id = models.IntegerField()
+	body = models.TextField(null = False)
+	user = models.ForeignKey(Puser)
+	created = models.DateTimeField(auto_now_add=True)
+	
+	def __unicode__(self):
+		return self.body
+
+	class Meta:
+		ordering = ["-created"]

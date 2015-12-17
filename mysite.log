@@ -1,0 +1,71 @@
+[17/Dec/2015 16:04:33] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/sharat910/django/leap/leap/leap/urls.py", line 19, in <module>
+    urlpatterns = patterns('',
+NameError: name 'patterns' is not defined
+[17/Dec/2015 16:04:33] ERROR [django.request:256] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 646, in is_valid_path
+    resolve(path, urlconf)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 521, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/sharat910/django/leap/leap/leap/urls.py", line 19, in <module>
+    urlpatterns = patterns('',
+NameError: name 'patterns' is not defined
+[17/Dec/2015 16:06:52] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 367, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 239, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 246, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/utils/lru_cache.py", line 101, in wrapper
+    result = user_function(*args, **kwds)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 105, in get_callable
+    mod = import_module(mod_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 5, in <module>
+    from .forms import *
+  File "/home/sharat910/django/leap/leap/portal/forms.py", line 6, in <module>
+    class RegistrationForm(ModelForm):
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/forms/models.py", line 266, in __new__
+    raise TypeError(msg)
+TypeError: RegistrationForm.Meta.exclude cannot be a string. Did you mean to type: ('user',)?
+[17/Dec/2015 16:06:52] WARNING [django.request:170] Not Found: /favicon.ico
+[17/Dec/2015 16:07:13] ERROR [django.request:256] Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 63, in LoginRequest
+    return render_to_response('login.html',context,context_instance = RequestContext(request))
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/shortcuts.py", line 45, in render_to_response
+    using=using)
+  File "/home/sharat910/django/leap/leapenv/local/lib/python2.7/site-packages/django/template/loader.py", line 137, in render_to_string
+    raise TemplateDoesNotExist(template_name)
+TemplateDoesNotExist: login.html
