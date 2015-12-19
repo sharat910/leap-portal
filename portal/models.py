@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .validators import validate_file_extension
 # Create your models here.
 
 class Puser(models.Model):
@@ -59,3 +60,11 @@ class Answer(models.Model):
 
 	class Meta:
 		ordering = ["-created"]
+
+class Event(models.Model):
+	name = models.CharField(max_length=100)
+	description = models.TextField()
+	startdate = models.DateField()
+	enddate = models.DateField()
+	user = models.ForeignKey(Puser)
+	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
