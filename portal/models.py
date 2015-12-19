@@ -6,7 +6,7 @@ from .validators import validate_file_extension
 class Puser(models.Model):
 	orgname = models.CharField(max_length=100)
 	email = models.EmailField()
-	joineddate = models.DateField()
+	joineddate = models.DateField(auto_now_add = True)
 	user = models.OneToOneField(User)
 	location = models.CharField(max_length=100)
 	designation = models.CharField(max_length=200)

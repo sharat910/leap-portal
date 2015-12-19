@@ -19,12 +19,15 @@ from portal.models import *
 from django.conf.urls.static import static
 from django.conf import settings
 
-urlpatterns = patterns('',
+urlpatterns = patterns('portal.views',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^register/$','portal.views.PuserRegistration'),
-    url(r'^login/$','portal.views.LoginRequest'),
-    url(r'^logout/$','portal.views.LogoutRequest'),
-    url(r'^$','portal.views.StartPage'),
+    url(r'^register/$','PuserRegistration'),
+    url(r'^login/$','LoginRequest'),
+    url(r'^logout/$','LogoutRequest'),
+    url(r'^$','StartPage'),
+    url(r'^posts/$','PostsView'),
+    url(r'^queries/$','QueriesView'),
+
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

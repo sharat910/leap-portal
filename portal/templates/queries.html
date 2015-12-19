@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Queries</title>
+</head>
+<body>
+<div align="center">
+<form action="" method="post">
+{%csrf_token%}
+
+{{ queryform.as_p }}
+
+<input type = "submit" value = "Ask"/>
+</form>
+<br><br>
+{%for query in queries%}
+{{query.user.orgname}}
+<br>
+{{query.user.designation}}
+<br>
+{{query.body}}
+<br>
+{%endfor%}
+</div>
+</body>
+</html>

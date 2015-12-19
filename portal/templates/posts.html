@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Posts</title>
+</head>
+<body>
+<div align="center">
+<form action="" method="post">
+{%csrf_token%}
+
+{{ postform.as_p }}
+
+<input type = "submit" value = "post"/>
+</form>
+<br><br>
+{%for post in posts%}
+{{post.user.orgname}}
+<br>
+{{post.user.designation}}
+<br>
+{{post.body}}
+<br>
+<br>
+{%endfor%}
+</div>
+</body>
+</html>
