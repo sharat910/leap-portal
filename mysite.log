@@ -279,3 +279,131 @@ Traceback (most recent call last):
   File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 985, in get_prep_value
     return int(value)
 TypeError: int() argument must be a string or a number, not 'SimpleLazyObject'
+[22/Dec/2015 12:52:39] WARNING [django.request:170] Not Found: /favicon.ico
+[22/Dec/2015 12:52:51] WARNING [django.request:170] Not Found: /posts/static/js/jquery-1.11.3.js
+[22/Dec/2015 13:05:34] ERROR [django.request:256] Internal Server Error: /admin/logout/
+Traceback (most recent call last):
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/handlers/base.py", line 164, in get_response
+    response = response.render()
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/response.py", line 158, in render
+    self.content = self.rendered_content
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/response.py", line 135, in rendered_content
+    content = template.render(context, self._request)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/loader_tags.py", line 135, in render
+    return compiled_parent._render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/loader_tags.py", line 135, in render
+    return compiled_parent._render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/defaulttags.py", line 329, in render
+    return nodelist.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/template/defaulttags.py", line 493, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 550, in reverse
+    app_list = resolver.app_dict[ns]
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 352, in app_dict
+    self._populate()
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 326, in _populate
+    lookups.appendlist(pattern.callback, (bits, p_pattern, pattern.default_args))
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 247, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/utils/lru_cache.py", line 101, in wrapper
+    result = user_function(*args, **kwds)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 106, in get_callable
+    mod = import_module(mod_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 116
+    try:
+    ^
+IndentationError: unexpected indent
+[22/Dec/2015 13:06:18] ERROR [django.request:256] Internal Server Error: /comment/
+Traceback (most recent call last):
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 113, in CommentView
+    comment = Comment(body = body,post = post,user = pu)
+NameError: global name 'pu' is not defined
+[22/Dec/2015 15:28:43] ERROR [django.request:256] Internal Server Error: /comment/
+Traceback (most recent call last):
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 114, in CommentView
+    post = Post.objects.get(pk = postid)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/query.py", line 334, in get
+    self.model._meta.object_name
+DoesNotExist: Post matching query does not exist.
+[22/Dec/2015 15:31:48] ERROR [django.request:256] Internal Server Error: /comment/
+Traceback (most recent call last):
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 116, in CommentView
+    comment.save()
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/base.py", line 822, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/base.py", line 861, in _do_insert
+    using=using, raw=raw)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/query.py", line 920, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 974, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 318, in execute
+    return Database.Cursor.execute(self, query, params)
+IntegrityError: NOT NULL constraint failed: portal_comment.body
+[22/Dec/2015 15:54:45] ERROR [django.request:256] Internal Server Error: /posts/
+Traceback (most recent call last):
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 81, in PostsView
+    pu = Puser.objects.get(user = u)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/sharat910/.local/lib/python2.7/site-packages/django/db/models/query.py", line 334, in get
+    self.model._meta.object_name
+DoesNotExist: Puser matching query does not exist.

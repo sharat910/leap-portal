@@ -27,7 +27,7 @@ urlpatterns = patterns('portal.views',
     url(r'^$','StartPage'),
     url(r'^posts/$','PostsView'),
     url(r'^queries/$','QueriesView'),
+    url(r'^comment/$','CommentView'),
 
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

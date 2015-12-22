@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Posts</title>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <div align="center">
@@ -13,15 +14,69 @@
 <input type = "submit" value = "post"/>
 </form>
 <br><br>
+<div id="posts">
 {%for post in posts%}
 {{post.user.orgname}}
 <br>
 {{post.user.designation}}
 <br>
 {{post.body}}
+<!-- Comment form to be hidden -->
+
+<form id = "NewCommentForm" onsubmit="return false">
+<input id = "body{{post.id}}" type = "text" />
+
+<button id ="{{post.id}}" class = "commentButton" onclick="createtask(this)">Comment</button>
+</form>
+<a id = "{{post.id}}" onclick="funct(this)">Show Comments</a>
+<div id = "comments{{post.id}}" style="display:none" >
+{%for comment in comments%}
+{%if comment.post == post %}
+<br>
+{{comment.body}}
+<br>
+{{comment.user.orgname}}
+<br>
+{%endif%}
+{%endfor%}
+</div>
 <br>
 <br>
 {%endfor%}
 </div>
+</div>
+<script type = "text/javascript">
+function createtask(e){
+	var id = e.id.toString();
+	var str = '#body' + id;
+	$.ajax({
+		type: "POST",
+		url: "/comment/",
+		dataType: "json",
+		async: true,
+		data: {
+			csrfmiddlewaretoken: '{{csrf_token}}',
+			post_id: id,
+			body:$(str).val() ,
+
+		},
+		success: function(json){
+			$('#output').html(json.message);
+			$("#posts").load(location.href + " #posts");
+
+
+
+		}
+	});
+}
+
+function funct(e){
+	var id = e.id;
+	var a = '#comments' + id;
+	$(a).toggle('slow');
+}
+</script>
+
+
 </body>
 </html>

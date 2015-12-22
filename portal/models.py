@@ -24,6 +24,8 @@ class Query(models.Model):
 		verbose_name = 'Query'
 		verbose_name_plural = 'Queries'
 		ordering = ["-created"]
+	def __unicode__(self):
+		return self.pk
 
 class Post(models.Model):
 	body = models.CharField(max_length=5000)
@@ -34,15 +36,16 @@ class Post(models.Model):
 		verbose_name = 'Post'
 		verbose_name_plural = 'Posts'
 		ordering = ["-created"]
-
+	def __unicode__(self):
+		return self.pk
 
 
 class Comment(models.Model):
-	post_id = models.IntegerField()
+	post = models.ForeignKey(Post)
 	body = models.TextField(null = False)
 	user = models.ForeignKey(Puser)
 	created = models.DateTimeField(auto_now_add=True)
-	
+
 	def __unicode__(self):
 		return self.body
 
@@ -50,11 +53,11 @@ class Comment(models.Model):
 		ordering = ["-created"]
 
 class Answer(models.Model):
-	post_id = models.IntegerField()
+	query = models.ForeignKey(Query)
 	body = models.TextField(null = False)
 	user = models.ForeignKey(Puser)
 	created = models.DateTimeField(auto_now_add=True)
-	
+
 	def __unicode__(self):
 		return self.body
 

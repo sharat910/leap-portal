@@ -6,6 +6,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+import json
 
 # Create your views here.
 
@@ -17,7 +18,6 @@ def PuserRegistration(request):
 		if form.is_valid():
 			user = User.objects.create_user(username = form.cleaned_data['username'],password = form.cleaned_data['password'])
 			user.save()
-			
 			stu = Puser( user =user,
 						 orgname = form.cleaned_data['orgname'],
 						 email = form.cleaned_data['email'],
@@ -30,7 +30,7 @@ def PuserRegistration(request):
 		else:
 			return render_to_response('register.html', {'form': form}, context_instance = RequestContext(request))
 
-			
+
 
 	else:
 		''' user hasnt submitted the form, pop up the blank form'''
@@ -56,9 +56,9 @@ def LoginRequest(request):
 				#return render_to_response('login.html',context,context_instance = RequestContext(request))
 		else:
 			return render_to_response('login.html',context,context_instance = RequestContext(request))
-				
 
-				
+
+
 
 	else:
 		form = LoginForm()
@@ -79,7 +79,7 @@ def StartPage(request):
 def PostsView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
-	
+	comments = Comment.objects.all()
 	if request.method == "POST":
 		form = PostForm(request.POST)
 		if form.is_valid():
@@ -89,24 +89,42 @@ def PostsView(request):
 			return HttpResponseRedirect('http://127.0.0.1:8000/posts/')
 		else:
 			postform = PostForm()
-			posts = Post.objects.all()	
+			posts = Post.objects.all()
 			context = { 'postform':postform,
 					'posts': posts,
+					'comments': comments,
 				   	}
 			return render_to_response('posts.html',context,context_instance  = RequestContext(request))
 
-	else:	
+	else:
 		postform = PostForm()
-		posts = Post.objects.all()	
+		posts = Post.objects.all()
 		context = { 'postform':postform,
 					'posts': posts,
+					'comments':comments,
 				   	}
 		return render_to_response('posts.html',context,context_instance  = RequestContext(request))
+
+
+def CommentView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	postid = request.POST.get("post_id")
+	body  = request.POST.get("body")
+	post = Post.objects.get(pk = postid)
+	comment = Comment(body = body,post = post,user = pu)
+	comment.save()
+	response_data = {}
+	try:
+		response_data['message'] = str(body)
+	except:
+		response_data['message'] = "Oops!"
+	return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 def QueriesView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
-	
+
 	if request.method == "POST":
 		form = QueryForm(request.POST)
 		if form.is_valid():
@@ -116,15 +134,15 @@ def QueriesView(request):
 			return HttpResponseRedirect('http://127.0.0.1:8000/queries/')
 		else:
 			queryform = QueryForm()
-			queries = Query.objects.all()	
+			queries = Query.objects.all()
 			context = { 'queryform':queryform,
 					'queries': queries,
 				   	}
 			return render_to_response('queries.html',context,context_instance  = RequestContext(request))
 
-	else:	
+	else:
 		queryform = QueryForm()
-		queries = Query.objects.all()	
+		queries = Query.objects.all()
 		context = { 'queryform':queryform,
 					'queries': queries,
 				   	}
