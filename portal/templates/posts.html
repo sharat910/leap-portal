@@ -21,11 +21,9 @@
 {{post.user.designation}}
 <br>
 {{post.body}}
-<!-- Comment form to be hidden -->
-
+<br>
 <form id = "NewCommentForm" onsubmit="return false">
 <input id = "body{{post.id}}" type = "text" />
-
 <button id ="{{post.id}}" class = "commentButton" onclick="createtask(this)">Comment</button>
 </form>
 <a id = "{{post.id}}" onclick="funct(this)">Show Comments</a>
@@ -49,6 +47,7 @@
 function createtask(e){
 	var id = e.id.toString();
 	var str = '#body' + id;
+	var str2 = "#comments" + id;
 	$.ajax({
 		type: "POST",
 		url: "/comment/",

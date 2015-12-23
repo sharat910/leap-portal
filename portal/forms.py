@@ -6,7 +6,7 @@ from .models import *
 class RegistrationForm(ModelForm):
 	username = forms.CharField(label = (u'Username'))
 	password = forms.CharField(label = (u'Password'), widget = forms.PasswordInput(render_value = False))
-	
+
 	class Meta:
 		model = Puser
 		exclude = ('user','joineddate')
@@ -52,3 +52,8 @@ class QueryForm(forms.ModelForm):
 	def clean_body(self):
 		body = self.cleaned_data.get('body')
 		return body
+
+class EventForm(forms.ModelForm):
+	class Meta:
+		model = Event
+		exclude = ('user',)

@@ -26,7 +26,7 @@ SECRET_KEY = 'oyx#7v#z-a+)kolj6f-01!6hwj70$vcn_t81%-vhbkwhvrv$b^'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portal',
+    'crispy_forms'
 )
 
 MIDDLEWARE_CLASSES = (

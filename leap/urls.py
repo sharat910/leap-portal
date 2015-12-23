@@ -28,6 +28,10 @@ urlpatterns = patterns('portal.views',
     url(r'^posts/$','PostsView'),
     url(r'^queries/$','QueriesView'),
     url(r'^comment/$','CommentView'),
+    url(r'^profile/$','ProfileView'),
 
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+    )

@@ -67,7 +67,5 @@ class Answer(models.Model):
 class Event(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
-	startdate = models.DateField()
-	enddate = models.DateField()
 	user = models.ForeignKey(Puser)
 	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])

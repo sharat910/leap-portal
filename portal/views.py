@@ -29,9 +29,6 @@ def PuserRegistration(request):
 			return HttpResponseRedirect('/login/')
 		else:
 			return render_to_response('register.html', {'form': form}, context_instance = RequestContext(request))
-
-
-
 	else:
 		''' user hasnt submitted the form, pop up the blank form'''
 		form = RegistrationForm()
@@ -80,30 +77,23 @@ def PostsView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
 	comments = Comment.objects.all()
-	if request.method == "POST":
-		form = PostForm(request.POST)
-		if form.is_valid():
-			body = form.cleaned_data['body']
-			newpost = Post(user = pu,body = body)
-			newpost.save()
-			return HttpResponseRedirect('http://127.0.0.1:8000/posts/')
-		else:
-			postform = PostForm()
-			posts = Post.objects.all()
-			context = { 'postform':postform,
-					'posts': posts,
-					'comments': comments,
-				   	}
-			return render_to_response('posts.html',context,context_instance  = RequestContext(request))
-
-	else:
-		postform = PostForm()
-		posts = Post.objects.all()
-		context = { 'postform':postform,
+	form = PostForm(request.POST or None)
+	posts = Post.objects.all()
+	context = { 'postform':form,
+				'posts': posts,
+				'comments':comments,
+			   	}
+	if form.is_valid():
+		body = form.cleaned_data['body']
+		newpost = Post(user = pu,body = body)
+		newpost.save()
+		form = PostForm()
+		context = { 'postform':form,
 					'posts': posts,
 					'comments':comments,
 				   	}
-		return render_to_response('posts.html',context,context_instance  = RequestContext(request))
+
+	return render_to_response('posts.html',context,context_instance  = RequestContext(request))
 
 
 def CommentView(request):
@@ -124,26 +114,41 @@ def CommentView(request):
 def QueriesView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
-
-	if request.method == "POST":
-		form = QueryForm(request.POST)
-		if form.is_valid():
-			body = form.cleaned_data['body']
-			newquery = Query(user = pu,body = body)
-			newquery.save()
-			return HttpResponseRedirect('http://127.0.0.1:8000/queries/')
-		else:
-			queryform = QueryForm()
-			queries = Query.objects.all()
-			context = { 'queryform':queryform,
+	answers = Answer.objects.all()
+	form = QueryForm(request.POST or None)
+	queries = Query.objects.all()
+	context = { 'postform':form,
+				'queries': queries,
+				'answers':answers,
+				}
+	if form.is_valid():
+		body = form.cleaned_data['body']
+		newquery = Query(user = pu,body = body)
+		newquery.save()
+		form = QueryForm()
+		context = { 'queryform':form,
 					'queries': queries,
-				   	}
-			return render_to_response('queries.html',context,context_instance  = RequestContext(request))
+					'answers':answers,
+					}
+	return render_to_response('queries.html',context,context_instance  = RequestContext(request))
 
-	else:
-		queryform = QueryForm()
-		queries = Query.objects.all()
-		context = { 'queryform':queryform,
-					'queries': queries,
-				   	}
-		return render_to_response('queries.html',context,context_instance  = RequestContext(request))
+def ProfileView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	events = Event.objects.filter(user = pu)
+	form = EventForm(request.POST or None, request.FILES or None)
+	context = {	'form' : form,
+			'pu' : pu,
+			'events':events,}
+	if form.is_valid():
+		event = Event(user = pu,
+		name = form.cleaned_data['name'],
+		description = form.cleaned_data['description'],
+		details = request.FILES['details'])
+		event.save()
+		print "Event Saved"
+		form = EventForm()
+		context = {	'form' : form,
+				'pu' : pu,
+				'events':events,}
+	return render_to_response('profile.html',context,context_instance  = RequestContext(request))

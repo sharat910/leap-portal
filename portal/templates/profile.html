@@ -1,0 +1,22 @@
+
+<html>
+<head>
+  <title>Profile</title>
+</head>
+<body>
+  <div align="center">
+  <form action=""method="post" enctype="multipart/form-data">
+  {%csrf_token%}
+  {{ form.as_p }}
+  <input type = "submit" value = "Add Event"/>
+  </form>
+  <br>
+  {% for event in events %}
+  {{event.name}}<br>
+  {{event.description}}<br>
+  <a href = {{event.details.url}}>Details</a><br>
+  {% endfor %}  
+
+</div>
+</body>
+</html>
