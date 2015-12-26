@@ -57,3 +57,8 @@ class EventForm(forms.ModelForm):
 	class Meta:
 		model = Event
 		exclude = ('user',)
+
+class ProjectForm(forms.ModelForm):
+	class Meta:
+		model = Project
+		exclude = ('user',)

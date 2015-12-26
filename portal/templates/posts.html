@@ -62,9 +62,6 @@ function createtask(e){
 		success: function(json){
 			$('#output').html(json.message);
 			$("#posts").load(location.href + " #posts");
-
-
-
 		}
 	});
 }

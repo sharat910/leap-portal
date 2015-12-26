@@ -11,6 +11,7 @@ class Puser(models.Model):
 	location = models.CharField(max_length=100)
 	designation = models.CharField(max_length=200)
 	institution = models.CharField(max_length=200)
+	image = models.FileField(upload_to='images/%Y/%m/%d',blank=True)
 
 	def __unicode__(self):
 		return self.orgname
@@ -25,7 +26,7 @@ class Query(models.Model):
 		verbose_name_plural = 'Queries'
 		ordering = ["-created"]
 	def __unicode__(self):
-		return self.pk
+		return self.body
 
 class Post(models.Model):
 	body = models.CharField(max_length=5000)
@@ -37,7 +38,7 @@ class Post(models.Model):
 		verbose_name_plural = 'Posts'
 		ordering = ["-created"]
 	def __unicode__(self):
-		return self.pk
+		return self.body
 
 
 class Comment(models.Model):
@@ -68,4 +69,27 @@ class Event(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
 	user = models.ForeignKey(Puser)
-	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
+	created = models.DateTimeField(auto_now_add=True)
+	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], null = True,blank=True)
+
+	def __unicode__(self):
+		return self.name
+
+	class Meta:
+		ordering = ["-created"]
+
+class Project(models.Model):
+	name = models.CharField(max_length=100)
+	description = models.TextField()
+	user = models.ForeignKey(Puser)
+	teamstrength = models.IntegerField()
+	workingarea = models.CharField(max_length=200)
+	achievements = models.TextField()
+	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension],null = True,blank=True)
+	created = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.name
+
+	class Meta:
+		ordering = ["-created"]

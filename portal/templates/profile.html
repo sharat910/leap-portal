@@ -5,17 +5,32 @@
 </head>
 <body>
   <div align="center">
-  <form action=""method="post" enctype="multipart/form-data">
-  {%csrf_token%}
-  {{ form.as_p }}
-  <input type = "submit" value = "Add Event"/>
-  </form>
-  <br>
-  {% for event in events %}
-  {{event.name}}<br>
-  {{event.description}}<br>
-  <a href = {{event.details.url}}>Details</a><br>
-  {% endfor %}  
+    <img src="{{pu.image.url}}" />
+    <h2>{{pu.orgname}}</h2>
+    <h3>{{pu.institution}}</h3>
+    <h3>{{pu.designation}}</h3>
+    <h2>Projects</h2>
+    {% for project in projects %}
+    <br>Project<br>
+    {{project.name}}<br>
+    {{project.description}}<br>
+    {{project.teamstrength}}<br>
+    {{project.workingarea}}<br>
+    {{project.achievements}}<br>
+    {% if project.details%}
+    <a href = {{project.details.url}}>Details</a><br>
+    {%endif%}
+    {% endfor %}<br><br>
+
+    <h2>Events</h2>
+    {% for event in events %}
+    <br>Event<br>
+    {{event.name}}<br>
+    {{event.description}}<br>
+    {% if event.details%}
+    <a href = {{event.details.url}}>Details</a><br>
+    {%endif%}
+    {% endfor %}
 
 </div>
 </body>

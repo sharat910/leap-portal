@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -111,13 +112,28 @@ def CommentView(request):
 		response_data['message'] = "Oops!"
 	return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
+def AnswerView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	queryid = request.POST.get("query_id")
+	body  = request.POST.get("body")
+	query = Query.objects.get(pk = queryid)
+	answer = Answer(body = body,query = query,user = pu)
+	answer.save()
+	response_data = {}
+	try:
+		response_data['message'] = str(body)
+	except:
+		response_data['message'] = "Oops!"
+	return HttpResponse(json.dumps(response_data), content_type = "application/json")
+
 def QueriesView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
 	answers = Answer.objects.all()
 	form = QueryForm(request.POST or None)
 	queries = Query.objects.all()
-	context = { 'postform':form,
+	context = { 'queryform':form,
 				'queries': queries,
 				'answers':answers,
 				}
@@ -132,23 +148,137 @@ def QueriesView(request):
 					}
 	return render_to_response('queries.html',context,context_instance  = RequestContext(request))
 
-def ProfileView(request):
+def EventView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
-	events = Event.objects.filter(user = pu)
 	form = EventForm(request.POST or None, request.FILES or None)
+	value = "Add Event"
 	context = {	'form' : form,
 			'pu' : pu,
-			'events':events,}
+			'value':value}
 	if form.is_valid():
 		event = Event(user = pu,
 		name = form.cleaned_data['name'],
 		description = form.cleaned_data['description'],
-		details = request.FILES['details'])
+		details = request.FILES.get('details', False))
 		event.save()
-		print "Event Saved"
+		body = "event"
 		form = EventForm()
+		context = {'body':body,
+					'pu' : pu}
+		return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
+
+	return render_to_response('event.html',context,context_instance  = RequestContext(request))
+
+def ProjectView(request):
+		u = request.user
+		pu = Puser.objects.get(user = u)
+		form = ProjectForm(request.POST or None, request.FILES or None)
+		value = "Update Project"
 		context = {	'form' : form,
 				'pu' : pu,
-				'events':events,}
+				'value':value
+				}
+		if form.is_valid():
+			proj = Project(user = pu,
+			name = form.cleaned_data['name'],
+			description = form.cleaned_data['description'],
+			details = request.FILES.get('details', False),
+			teamstrength = form.cleaned_data['teamstrength'],
+			achievements = form.cleaned_data['achievements'],
+			workingarea = form.cleaned_data['workingarea'])
+			proj.save()
+			body = "project"
+			context = {'body':body,
+						'pu' : pu}
+			return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
+
+		return render_to_response('project.html',context,context_instance  = RequestContext(request))
+
+def ProfileView(request,username):
+	u = User.objects.get(username = username)
+	pu = Puser.objects.get(user = u)
+	projects = Project.objects.filter(user = pu)
+	events = Event.objects.filter(user = pu)
+
+	context = {'pu':pu,
+	'events':events,
+	'projects':projects,
+	}
 	return render_to_response('profile.html',context,context_instance  = RequestContext(request))
+
+
+##EDIT VIEWS
+
+def EditPostView(request,id):
+	post = get_object_or_404(Post,pk = id)
+	if request.user == post.user.user:
+		form = PostForm(request.POST or None,instance = post)
+		if form.is_valid():
+			form.save()
+			print "edit post saved"
+			return HttpResponseRedirect('/posts/')
+
+		context = {
+		'post':post,
+		'form':form
+		}
+		return render_to_response('editpost.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+
+def EditQueryView(request,id):
+	query = get_object_or_404(Query,pk = id)
+	if request.user == query.user.user:
+		form = QueryForm(request.POST or None,instance = post)
+		if form.is_valid():
+			form.save()
+			print "edit query saved"
+			return HttpResponseRedirect('/queries/')
+
+		context = {
+		'query':query,
+		'form':form
+		}
+		return render_to_response('editquery.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+
+def EditEventView(request,id):
+	event = get_object_or_404(Event,pk = id)
+	if request.user == event.user.user:
+		form = EventForm(request.POST or None,instance = post)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/profile/' + str(request.user.username))
+		value = "Update Event"
+		context = {
+		'event':event,
+		'form':form,
+		'value':value
+		}
+		return render_to_response('event.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+
+def EditProjectView(request,id):
+	project = get_object_or_404(Project,pk = id)
+	if request.user == project.user.user:
+		form = EventForm(request.POST or None,instance = post)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/profile/' + str(request.user.username))
+		value = "Update Project"
+		context = {
+		'project':project,
+		'form':form,
+		'value':value
+		}
+		return render_to_response('project.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+
+def CommunityView(request):
+	pu = Puser.objects.all()
+	context ={'pu': pu}
+	return render_to_response('community.html',context,context_instance  = RequestContext(request))

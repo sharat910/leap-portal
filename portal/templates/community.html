@@ -1,0 +1,10 @@
+<html>
+<head>
+  <title>Community</title>
+</head>
+<body>
+  {%for u in pu%}
+  <a href = "/profile/{{u.user.username}}"><img src="{{u.image.url}}" /></a>
+  {%endfor%}
+</body>
+</html>

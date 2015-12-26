@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title>Profile</title>
+</head>
+<body>
+  <div align="center">
+  <form action=""method="post" enctype="multipart/form-data">
+  {%csrf_token%}
+  {{ form.as_p }}
+  <input type = "submit" value = "{{value}}" />
+  </form>
+  <br>
+</div>
+</body>
+</html>
