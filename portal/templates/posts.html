@@ -22,11 +22,14 @@
 <br>
 {{post.body}}
 <br>
+
 <form id = "NewCommentForm" onsubmit="return false">
 <input id = "body{{post.id}}" type = "text" />
 <button id ="{{post.id}}" class = "commentButton" onclick="createtask(this)">Comment</button>
 </form>
 <a id = "{{post.id}}" onclick="funct(this)">Show Comments</a>
+
+
 <div id = "comments{{post.id}}" style="display:none" >
 {%for comment in comments%}
 {%if comment.post == post %}

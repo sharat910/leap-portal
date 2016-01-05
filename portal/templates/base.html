@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% load material_form %}
+<html>
+<head>
+  <title>Base</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link type="text/css" rel="stylesheet" href={% static 'css/materialize.min.css'%}  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href={% static 'css/style.css'%} >
+  {% include 'material/includes/material_css.html' %}
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  {% include 'material/includes/material_js.html' %}
+  <style type="text/css">
+    body{background-color:#f3f2f2;}
+  </style>
+  </head>
+  <body>
+     <nav class = "blue darken-1">
+    <div class="nav-wrapper">
+	  <a href="#" class="brand-logo" style="padding-left:10%; font-size:44px;">LEAP</a>
+	  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right:14%;">
+        <li><a href="/home/" style="font-size:20px;">Home</a></li>
+        <li><a href="/queries/" style="font-size:20px;">Queries</a></li>
+        <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
+        <li><a href="/community/" style="font-size:20px;">Community</a></li>
+        <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
+        <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+      </ul>
+	  <ul class="side-nav" id="mobile-demo">
+        <li><a href="/home/" style="font-size:20px;">Home</a></li>
+        <li><a href="/queries/" style="font-size:20px;">Queries</a></li>
+        <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
+        <li><a href="/community/" style="font-size:20px;">Community</a></li>
+        <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
+        <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<body>
+  {%block body%}
+
+  {% endblock %}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
+</body>
+
+</html>

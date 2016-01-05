@@ -1,10 +1,36 @@
+{% extends "base.html" %}
 <html>
 <head>
-  <title>Community</title>
-</head>
-<body>
-  {%for u in pu%}
-  <a href = "/profile/{{u.user.username}}"><img src="{{u.image.url}}" /></a>
-  {%endfor%}
+  <title>LEAP Login</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<style type="text/css">
+  body{background-color:#f3f2f2;}
+.gallery > div {float:left; margin: 20px;}
+img{box-shadow: 10px 10px 5px #888888;
+border-radius:300px;}
+
+  </style>
+  </head>
+  <body>
+    {%block body%}
+<div class="container">
+  <div class=" fade-in one">
+   <h1 style="font-family: 'Roboto', sans-serif; color:#1976d2;" align="center" >Community</h1>
+  </div>
+  <div class=" fade-in two">
+   <h5 style="font-family: 'Roboto', sans-serif; color:#1976d2;" align="center" >Community is a place where you will find all the organisation which are connected to you through LEAP. It joins different organisations which share common values or common beliefs.</h5>
+  </div><br><br>
+  <div class="gallery">
+    {%for u in pu%}
+   <div class="fade-in three">
+
+    <a href = "/profile/{{u.user.username}}"><img src="{{u.image.url}}" /></a>
+    {{u.orgname}}
+    </div>
+{%endfor%}
+</div>
+</div>
+{% endblock %}
 </body>
 </html>

@@ -13,7 +13,7 @@ import json
 
 def PuserRegistration(request):
 	if request.user.is_authenticated():
-		return HttpResponseRedirect('/posts/')
+		return HttpResponseRedirect('/home/')
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
@@ -38,30 +38,20 @@ def PuserRegistration(request):
 
 def LoginRequest(request):
 	if request.user.is_authenticated():
-		return HttpResponseRedirect('/posts/')
-	if request.method == "POST":
-		form = LoginForm(request.POST)
+		return HttpResponseRedirect('/home/')
+	else:
+		form = LoginForm(request.POST or None)
 		if form.is_valid():
-
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
 			student = authenticate(username=username, password=password)
 			if student is not None:
 				login(request, student)
-				return HttpResponseRedirect('/posts/')
+				return HttpResponseRedirect('/home/')
 			else:
 				return HttpResponseRedirect('/login/')
-				#return render_to_response('login.html',context,context_instance = RequestContext(request))
-		else:
-			return render_to_response('login.html',context,context_instance = RequestContext(request))
-
-
-
-
-	else:
-		form = LoginForm()
 		context = {'form': form}
-		return render_to_response('login.html',context,context_instance = RequestContext(request))
+		return render_to_response('login1.html',context,context_instance = RequestContext(request))
 
 def LogoutRequest(request):
 	logout(request)
@@ -69,7 +59,7 @@ def LogoutRequest(request):
 
 def StartPage(request):
 	if request.user.is_authenticated():
-		return HttpResponseRedirect('/posts/')
+		return HttpResponseRedirect('/home/')
 	else:
 		return HttpResponseRedirect('/login/')
 
@@ -83,6 +73,7 @@ def PostsView(request):
 	context = { 'postform':form,
 				'posts': posts,
 				'comments':comments,
+				'pu':pu,
 			   	}
 	if form.is_valid():
 		body = form.cleaned_data['body']
@@ -92,9 +83,10 @@ def PostsView(request):
 		context = { 'postform':form,
 					'posts': posts,
 					'comments':comments,
+					'pu':pu,
 				   	}
 
-	return render_to_response('posts.html',context,context_instance  = RequestContext(request))
+	return render_to_response('home.html',context,context_instance  = RequestContext(request))
 
 
 def CommentView(request):
@@ -136,6 +128,7 @@ def QueriesView(request):
 	context = { 'queryform':form,
 				'queries': queries,
 				'answers':answers,
+				'pu':pu,
 				}
 	if form.is_valid():
 		body = form.cleaned_data['body']
@@ -145,8 +138,9 @@ def QueriesView(request):
 		context = { 'queryform':form,
 					'queries': queries,
 					'answers':answers,
+					'pu':pu,
 					}
-	return render_to_response('queries.html',context,context_instance  = RequestContext(request))
+	return render_to_response('home1.html',context,context_instance  = RequestContext(request))
 
 def EventView(request):
 	u = request.user
@@ -168,7 +162,7 @@ def EventView(request):
 					'pu' : pu}
 		return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
 
-	return render_to_response('event.html',context,context_instance  = RequestContext(request))
+	return render_to_response('addevent.html',context,context_instance  = RequestContext(request))
 
 def ProjectView(request):
 		u = request.user
@@ -193,7 +187,7 @@ def ProjectView(request):
 						'pu' : pu}
 			return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
 
-		return render_to_response('project.html',context,context_instance  = RequestContext(request))
+		return render_to_response('addproject.html',context,context_instance  = RequestContext(request))
 
 def ProfileView(request,username):
 	u = User.objects.get(username = username)
@@ -205,8 +199,10 @@ def ProfileView(request,username):
 	'events':events,
 	'projects':projects,
 	}
-	return render_to_response('profile.html',context,context_instance  = RequestContext(request))
+	return render_to_response('profile1.html',context,context_instance  = RequestContext(request))
 
+def MentorView(request):
+	return render_to_response('mentor.html')
 
 ##EDIT VIEWS
 

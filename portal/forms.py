@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import *
+from material import *
 
 class RegistrationForm(ModelForm):
 	username = forms.CharField(label = (u'Username'))
@@ -26,8 +27,10 @@ class RegistrationForm(ModelForm):
 		return password
 
 class LoginForm(forms.Form):
-	username = forms.CharField(label = (u'UserName'))
-	password = forms.CharField(label = (u'Password'), widget = forms.PasswordInput(render_value = False))
+	username = forms.CharField(label = (u'UserName'),required = True)
+	password = forms.CharField(label = (u'Password'), widget = forms.PasswordInput(render_value = False),required = True)
+
+	layout = Layout('username','password')
 
 class PostForm(forms.ModelForm):
 	body = forms.CharField(label=(u'Post'), required = True,widget=forms.Textarea)

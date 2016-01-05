@@ -1,0 +1,24 @@
+{% load material_form %}
+<html>
+<head>
+ <title>Profile</title>
+ {% include 'material/includes/material_css.html' %}
+   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   {% include 'material/includes/material_js.html' %}
+</head>
+<body>
+ <div align="center">
+<br><br><br>
+form method="POST" class="viewform">{% csrf_token %}
+    {% form %}
+        {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+        {% part form.password prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
+    {% endform %}
+    <button type="submit" name="_submit" class="btn btn-primary btn-lg">Submit</button>
+</form>
+
+<a href="/register/">Register</a>
+
+</div>
+</body>
+</html>

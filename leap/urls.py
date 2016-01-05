@@ -25,7 +25,7 @@ urlpatterns = patterns('portal.views',
     url(r'^login/$','LoginRequest'),
     url(r'^logout/$','LogoutRequest'),
     url(r'^$','StartPage'),
-    url(r'^posts/$','PostsView'),
+    url(r'^home/$','PostsView'),
     url(r'^queries/$','QueriesView'),
     url(r'^comment/$','CommentView'),
     url(r'^answer/$','AnswerView'),
@@ -33,10 +33,12 @@ urlpatterns = patterns('portal.views',
     url(r'^addproject/$','ProjectView'),
     url(r'^profile/(?P<username>\w+)$','ProfileView'),
     url(r'^community/$','CommunityView'),
+    url(r'^mentors/$','MentorView'),
     url(r'^editpost/(?P<id>\d+)$','EditPostView'),
     url(r'^editquery/(?P<id>\d+)$','EditQueryView'),
     url(r'^editevent/(?P<id>\d+)$','EditEventView'),
     url(r'^editproject/(?P<id>\d+)$','EditProjectView'),
+
 
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

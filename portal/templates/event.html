@@ -1,6 +1,10 @@
+ {% load material_form %}
 <html>
 <head>
   <title>Profile</title>
+    {% include 'material/includes/material_css.html' %}
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    {% include 'material/includes/material_js.html' %}
 </head>
 <body>
   <div align="center">
@@ -9,6 +13,13 @@
   {{ form.as_p }}
   <input type = "submit" value = "{{value}}" />
   </form>
+
+      <form method="POST">
+        {% csrf_token %}
+        {% form form=form %}{% endform %}
+        <button type="submit" name="_submit" class="btn">Submit</button>
+    </form>
+
   <br>
 </div>
 </body>

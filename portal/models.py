@@ -11,6 +11,7 @@ class Puser(models.Model):
 	location = models.CharField(max_length=100)
 	designation = models.CharField(max_length=200)
 	institution = models.CharField(max_length=200)
+	alumni = models.CharField(max_length=200,null = True)
 	image = models.FileField(upload_to='images/%Y/%m/%d',blank=True)
 
 	def __unicode__(self):

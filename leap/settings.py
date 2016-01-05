@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'portal',
     'crispy_forms',
     'endless_pagination',
+    'material',
+    'material.frontend',
+    'material.admin',
 )
 
 MIDDLEWARE_CLASSES = (
