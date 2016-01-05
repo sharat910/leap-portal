@@ -2506,3 +2506,27 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 334, in get
     self.model._meta.object_name
 DoesNotExist: Query matching query does not exist.
+[05/Jan/2016 13:13:54] WARNING [django.request:170] Not Found: /favicon.ico
+[05/Jan/2016 13:23:30] ERROR [django.request:256] Internal Server Error: /home/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sharat910/django/leap/leap/portal/views.py", line 69, in PostsView
+    pu = Puser.objects.get(user = u)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 334, in get
+    self.model._meta.object_name
+DoesNotExist: Puser matching query does not exist.
+[05/Jan/2016 13:23:35] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:23:36] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:28:22] WARNING [django.request:170] Not Found: /addproject/nss
+[05/Jan/2016 13:30:18] WARNING [django.request:170] Not Found: /mentors/images/community.png
+[05/Jan/2016 13:42:18] WARNING [django.request:170] Not Found: /mentors/images/community.png
+[05/Jan/2016 13:51:09] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:51:09] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:51:33] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:51:33] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 13:59:03] WARNING [django.request:170] Not Found: /mentors/images/community.png
+[05/Jan/2016 14:13:16] WARNING [django.request:170] Not Found: /login/js/materialize.min.js
+[05/Jan/2016 14:13:16] WARNING [django.request:170] Not Found: /login/js/materialize.min.js

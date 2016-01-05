@@ -132,6 +132,7 @@ function createtask(e){
 		success: function(json){
 			$('#output').html(json.message);
 			// $(str2).load(location.href + " " + str2);
+      window.location.reload(true);
 		}
 	});
 }
