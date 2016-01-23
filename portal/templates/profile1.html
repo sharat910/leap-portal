@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 <html>
 <head>
-  <title>Profile</title>
+  <title>{%block title%}Profile{%endblock%}</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css">
@@ -17,36 +17,52 @@
  <div class="row">
       <div class="col s3.5"><img src="{{pu.image.url}}" class="responsive-img"></div>
       <div class="col s8.5"><p style="font-size:27px; font-weight:bold;" id="id_name">{{pu.orgname}}<br></p>
-	  <span style="font-weight:lighter; font-size:18px;">Institution Name:</span> <span style="font-size:22px; font-weight:bold;"  id="id_institutionname"> {{pu.institution}}</span>
-<br>	  <span style="font-weight:lighter; font-size:18px;">Designation:</span> <span style="font-size:22px; font-weight:bold;"  id="id_designation">{{pu.designation}}</span>
-<br>	  <span style="font-weight:lighter; font-size:18px;">Location:</span> <span style="font-size:22px; font-weight:bold;"  id="id_location"> {{pu.location}}</span>
+	  <span style="font-weight:bold; font-size:22px;">Institution Name:</span> <span style="font-size:18px; font-weight:bold;"  id="id_institutionname"> {{pu.institution}}</span>
+<br>	  <span style="font-weight:bold; font-size:22px;">Designation:</span> <span style="font-size:18px;"  id="id_designation">{{pu.designation}}</span>
+<br>	  <span style="font-weight:bold; font-size:22px;">Location:</span> <span style="font-size:18px;"  id="id_location"> {{pu.location}}</span>
+<br>	  <span style="font-weight:bold; font-size:22px;">Contact</span> <span style="font-size:18px;"  id="id_contact"> {{pu.contact}}</span>
+{% if pu.weblink %}<br>	  <span style="font-weight:bold; font-size:22px;">Website Link:</span> <span style="font-size:18px;"  id="id_weblink"> {{pu.weblink}}</span>{%endif%}
+{% if pu.fbprofile %}<br>	  <span style="font-weight:bold; font-size:18px;">FB profile:</span> <span style="font-size:18px;"  id="id_fbprofile"> {{pu.fbprofile}}</span>{%endif%}
 
-<br>	  <span style="font-weight:lighter; font-size:18px;">E-mail:</span> <span style="font-size:20px;"  id="id_email"> {{pu.email}}</span>
+<br>	  <span style="font-weight:bold; font-size:18px;">E-mail:</span> <span style="font-size:20px;"  id="id_email"> {{pu.email}}</span>
 	  </div>
   </div>
   </div><br>
+  {% if request.user == pu.user %}
+  <div class=" fade-in two">
+  <div class="card-panel white">
+<div class="row">
+    <div class="col s12 l3 m3"><a class="modal-trigger tt" href="/addproject/" style="font-size:20px; padding-left:10%;">Add Project</a></div>
+    <div class="col s12 l3 m3"><a class="modal-trigger tt" href="/addevent/" style="font-size:20px; padding-left:10%;">Add Event</a></div>
+  <div class="col s12 l3 m3"><a class="modal-trigger tt" href="/addalumnus/" style="font-size:20px; padding-left:10%;">Add Alumni</a></div>
+  <div class="col s12 l3 m3"><a class="modal-trigger tt" href="/addmedia/" style="font-size:20px; padding-left:10%;">Add Media</a></div>
+  </div>
+</div></div><br>
+{% endif %}
+
   {% if projects %}
     <div class=" fade-in two">
     <div class="card-panel white">
 <span class = "section">
     <h4 align = "center" style="color:#000000;"><u>Projects</u><br><br></h4>
-    {% if request.user == pu.user %}  <a href="/addproject/">Add a New Project</a><br> {% endif %}
+
       {% for project in projects %}
-      <div class="divider"></div>
+
 		<h4 align="center" style="color:#000000;">{{project.name}}<br></h4>
 	<ul type="disc">
 	<li>
-    <p align="left"> <span style="font-weight:lighter; font-size:18px;">Project Title:</span> <span style="font-size:22px; font-weight:bold;"  id="id_projectname"> BITS Pilani</span>
-<br>	  <span style="font-weight:lighter; font-size:18px;">Description:</span> <span style="font-size:22px; font-weight:bold;"  id="id_description"> {{project.description}}</span>
-<br>	  <span style="font-weight:lighter; font-size:18px;">Achievements:</span> <span style="font-size:22px; font-weight:bold;"  id="id_achievement"> {{project.achievements}}</span>
-<br>    <span style="font-weight:lighter; font-size:18px;">Team Strength:</span> <span style="font-size:22px; font-weight:bold;"  id="id_teamstrength"> {{project.teamstrength}}</span>
-        <span style="font-weight:lighter; font-size:18px;">  | Working Area:</span> <span style="font-size:22px; font-weight:bold;"  id="id_workingarea"> {{project.workingarea}}</span>
+    <p align="left"> <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Project Title:</span> <span style="font-size:21px; "  id="id_projectname"> BITS Pilani</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{project.description}}</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Achievements:</span> <span style="font-size:16px;"  id="id_achievement"> {{project.achievements}}</span>
+<br>    <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Team Strength:</span> <span style="font-size:16px;"  id="id_teamstrength"> {{project.teamstrength}}</span>
+        <span style="font-weight:lighter; font-size:20px; font-weight:bold;">  | Working Area:</span> <span style="font-size:16px;"  id="id_workingarea"> {{project.workingarea}}</span>
 
       {% if not project.details.url == '/media/False' %}
-      <a href = {{project.details.url}}>Details</a><br>
+      <br><span style="font-weight:lighter; font-size:20px; font-weight:bold;">Attachment:</span> <a href = {{project.details.url}}>Details</a><br>
       {% endif %}
  </p></li>
-
+<div class="divider"></div>
+</ul>
 	{% endfor %}
   </div>
   </div><br>
@@ -56,30 +72,119 @@
     <div class="card-panel white">
 <span class = "section">
     <h4 align = "center" style="color:#000000;"><u>Events</u><br><br></h4>
-    {% if request.user == pu.user %}<a href="/addevent/">Add Event</a> {% endif %}
     {% for event in events %}
-		<h4 align="center" style="color:#000000;">{{event.name}} <span id = "id_number">1<br></h4>
+		<h4 align="center" style="color:#000000;">{{event.name}} <br></h4>
 	<ul type="disc">
 	<li>
-    <p align="left"> <span style="font-weight:lighter; font-size:18px;">Title:</span> <span style="font-size:22px; font-weight:bold;"  id="id_eventname"> {{event.name}}</span>
-<br>	  <span style="font-weight:lighter; font-size:18px;">Description:</span> <span style="font-size:22px; font-weight:bold;"  id="id_description"> {{event.description}} </span>
+    <p align="left"> <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Title:</span> <span style="font-size:22px;"  id="id_eventname"> {{event.name}}</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{event.description}} </span>
 <br>  {% if event.details %}
 {% if not event.details.url == '/media/False'%}
-<a href = {{event.details.url}}>Details</a><br>
+<span style="font-weight:lighter; font-size:20px; font-weight:bold;">Attachment: </span><a href = {{event.details.url}}>Details</a><br>
 {%endif%}{%endif%}
  </p></li>
- <div class="divider"></div>
+ <div class="divider"></div><br>
 
  </ul>
 
 {%endfor%}
   </div>
+  </div>
+{% endif %}
+<br>
+{%if alumni%}
+  <div class=" fade-in three">
+  <div class="card-panel white">
+<span class = "section">
+  <h4 align = "center" style="color:#000000;"><u>Notable Alumni</u><br><br></h4>
 
-          </div>
-		  </div></div>
-		  </div>
-		  <br>
-      {% endif %}
+  {% for a in alumni %}
+  <h4 align="center" style="color:#000000;">{{alumni.name}} <span id = "id_number">{{a.name}}<br></h4>
+<ul type="disc">
+<li>
+<span style="font-weight:lighter; font-size:20px; font-weight:bold;">About:</span> <span style="font-size:16px;"  id="id_description"> {{a.about}} </span>
+</li>
+<br>
+<div class="divider"></div>
+</ul>
+
+{%endfor%}
+</div>
+</div>
+{% endif %}
+
+<br>
+{%if media%}
+  <div class=" fade-in three">
+  <div class="card-panel white">
+<span class = "section">
+  <h4 align = "center" style="color:#000000;"><u>Media Publications</u><br><br></h4>
+  {% for med in media %}
+  <h4 align="center" style="color:#000000;">{{med.title}} <span id = "id_number"><br></h4>
+<ul type="disc">
+<li>
+  <p align="left"><span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{med.description}} </span>
+ </span>
+<br>    <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Link:</span> <span style="font-size:16px;"  id="id_description"> {{med.link}} </span>
+</span>
+</p></li>
+<div class="divider"></div>
+
+</ul>
+
+{%endfor%}
+</div>
+</div>
+{% endif %}
+
+
+
+</div></div>
+<br>
+<div id="addalumni" class="modal" style="border:thick inset #fff; background-color:#eeeeee;">
+    <div class="modal-content">
+      <h2 align="center" style="font-family:'AR BERKLEY';"><u>Sponsors</u></h2>
+      <p style="font-size:20px; letter-spacing:1px; line-height:40px;">
+	  <div class="to">
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Mentoring Sponsor"><img src="Images/ASME.png" class="responsive-img"></a>
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Hosting Sponsor"><img src="Images/liquidserve_logo.png" class="responsive-img"></a>
+</p></div>
+    </div>
+  </div>
+
+  <div id="addproject" class="modal"  style="border:thick inset #0d47a1; background-color:#bbdefb;">
+      <div class="modal-content">
+        <h3 align="center" style="font-family:'AR BERKLEY';"><u>Competetions</u></h3>
+        <p style="font-size:20px; letter-spacing:1px; line-height:40px;">Team Robocon represents BITS Pilani in "ABU ROBOCON" held annually. It is an international Robotics Contest whose nationals are held in Pune.The problem statement involves building robots for accomplishing various challenging tasks which involve innovation in the fields of Design,Manufacturing,Electronics and Programming.The bots developed are either semi autonomous or fully autonomous.
+
+  Besides this, The Team takes part in various Robotic Competitions held across the country during various times of the year.
+
+   All the bots developed by the Team are put to display in Apogee, the annual technical festival of BITS,Pilani.</p>
+      </div>
+    </div>
+
+
+  <div id="addevent" class="modal" style="border:thick inset #fff; background-color:#eeeeee;">
+    <div class="modal-content">
+      <h2 align="center" style="font-family:'AR BERKLEY';"><u>Sponsors</u></h2>
+      <p style="font-size:20px; letter-spacing:1px; line-height:40px;">
+	  <div class="to">
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Mentoring Sponsor"><img src="Images/ASME.png" class="responsive-img"></a>
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Hosting Sponsor"><img src="Images/liquidserve_logo.png" class="responsive-img"></a>
+</p></div>
+    </div>
+  </div>
+
+  <div id="addmedia" class="modal" style="border:thick inset #fff; background-color:#eeeeee;">
+    <div class="modal-content">
+      <h2 align="center" style="font-family:'AR BERKLEY';"><u>Sponsors</u></h2>
+      <p style="font-size:20px; letter-spacing:1px; line-height:40px;">
+	  <div class="to">
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Mentoring Sponsor"><img src="Images/ASME.png" class="responsive-img"></a>
+	  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Hosting Sponsor"><img src="Images/liquidserve_logo.png" class="responsive-img"></a>
+</p></div>
+    </div>
+  </div>
     {% endblock %}
 </body>
   <script type="text/javascript">
@@ -89,4 +194,9 @@
     $(".button-collapse").sideNav();
 
 	</script>
+  <script>
+  $(document).ready(function(){
+      $('.modal-trigger').leanModal();
+    });
+   </script>
 </html>

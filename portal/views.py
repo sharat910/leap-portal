@@ -7,7 +7,9 @@ from .forms import *
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import json
+from django.db.models import Q
 
 # Create your views here.
 
@@ -53,6 +55,7 @@ def LoginRequest(request):
 		context = {'form': form}
 		return render_to_response('login1.html',context,context_instance = RequestContext(request))
 
+@login_required
 def LogoutRequest(request):
 	logout(request)
 	return HttpResponseRedirect('/')
@@ -63,7 +66,7 @@ def StartPage(request):
 	else:
 		return HttpResponseRedirect('/login/')
 
-
+@login_required
 def PostsView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
@@ -88,7 +91,7 @@ def PostsView(request):
 
 	return render_to_response('home.html',context,context_instance  = RequestContext(request))
 
-
+@login_required
 def CommentView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
@@ -104,14 +107,16 @@ def CommentView(request):
 		response_data['message'] = "Oops!"
 	return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
+@login_required
 def AnswerView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
 	queryid = request.POST.get("query_id")
 	body  = request.POST.get("body")
-	query = Query.objects.get(pk = queryid)
-	answer = Answer(body = body,query = query,user = pu)
-	answer.save()
+	if not body == "":
+		query = Query.objects.get(pk = queryid)
+		answer = Answer(body = body,query = query,user = pu)
+		answer.save()
 	response_data = {}
 	try:
 		response_data['message'] = str(body)
@@ -119,6 +124,7 @@ def AnswerView(request):
 		response_data['message'] = "Oops!"
 	return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
+@login_required
 def QueriesView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
@@ -142,6 +148,50 @@ def QueriesView(request):
 					}
 	return render_to_response('home1.html',context,context_instance  = RequestContext(request))
 
+@login_required
+def MyQueriesView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	answers = Answer.objects.all()
+	form = QueryForm(request.POST or None)
+	queries = Query.objects.filter(user = pu)
+	context = { 'queryform':form,
+				'queries': queries,
+				'answers':answers,
+				'pu':pu,
+				}
+	if form.is_valid():
+		body = form.cleaned_data['body']
+		newquery = Query(user = pu,body = body)
+		newquery.save()
+		form = QueryForm()
+		context = { 'queryform':form,
+					'queries': queries,
+					'answers':answers,
+					'pu':pu,
+					}
+	return render_to_response('myqueries.html',context,context_instance  = RequestContext(request))
+
+@login_required
+def SearchQueriesView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	form = SearchForm(request.POST or None)
+	context = { 'searchform':form,
+				'pu':pu,
+				}
+	if form.is_valid():
+		body = form.cleaned_data['body']
+		results = Query.objects.filter(Q(body__icontains = body))
+		form = SearchForm()
+		context = { 'searchform':form,
+					'results': results,
+					'pu':pu,
+					}
+	return render_to_response('search.html',context,context_instance  = RequestContext(request))
+
+
+@login_required
 def EventView(request):
 	u = request.user
 	pu = Puser.objects.get(user = u)
@@ -160,10 +210,57 @@ def EventView(request):
 		form = EventForm()
 		context = {'body':body,
 					'pu' : pu}
-		return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
+		return HttpResponseRedirect('/profile/' + u.username )
 
 	return render_to_response('addevent.html',context,context_instance  = RequestContext(request))
 
+
+@login_required
+def AlumniView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	form = AlumniForm(request.POST or None)
+	value = "Add Alumnus"
+	context = {	'form' : form,
+			'pu' : pu,
+			'value':value}
+	if form.is_valid():
+		alumnus = Alumni(user = pu,
+		name = form.cleaned_data['name'],
+		about = form.cleaned_data['about'])
+		alumnus.save()
+		body = "alumnus"
+		form = AlumniForm()
+		context = {'body':body,
+					'pu' : pu}
+		return HttpResponseRedirect('/profile/' + u.username )
+
+	return render_to_response('addalumni.html',context,context_instance  = RequestContext(request))
+
+@login_required
+def MediaView(request):
+	u = request.user
+	pu = Puser.objects.get(user = u)
+	form = MediaForm(request.POST or None)
+	value = "Add Media Publication"
+	context = {	'form' : form,
+			'pu' : pu,
+			'value':value}
+	if form.is_valid():
+		media = Media(user = pu,
+		title = form.cleaned_data['title'],
+		description = form.cleaned_data['description'],
+		link = form.cleaned_data['link'])
+		media.save()
+		body = "media publication"
+		form = MediaForm()
+		context = {'body':body,
+					'pu' : pu}
+		return HttpResponseRedirect('/profile/' + u.username )
+
+	return render_to_response('addmedia.html',context,context_instance  = RequestContext(request))
+
+@login_required
 def ProjectView(request):
 		u = request.user
 		pu = Puser.objects.get(user = u)
@@ -185,24 +282,32 @@ def ProjectView(request):
 			body = "project"
 			context = {'body':body,
 						'pu' : pu}
-			return render_to_response('thankyou.html',context,context_instance  = RequestContext(request))
+			return HttpResponseRedirect('/profile/' + u.username )
 
 		return render_to_response('addproject.html',context,context_instance  = RequestContext(request))
 
+@login_required
 def ProfileView(request,username):
 	u = User.objects.get(username = username)
 	pu = Puser.objects.get(user = u)
 	projects = Project.objects.filter(user = pu)
 	events = Event.objects.filter(user = pu)
-
+	alumni = Alumni.objects.filter(user = pu)
+	media  = Media.objects.filter(user = pu)
 	context = {'pu':pu,
 	'events':events,
 	'projects':projects,
+	'alumni':alumni,
+	'media':media,
 	}
 	return render_to_response('profile1.html',context,context_instance  = RequestContext(request))
 
+@login_required
 def MentorView(request):
-	return render_to_response('mentor.html')
+	u = User.objects.get(username = username)
+	pu = Puser.objects.get(user = u)
+	context = {'pu':pu,}
+	return render_to_response('mentor.html',context,context_instance  = RequestContext(request))
 
 ##EDIT VIEWS
 

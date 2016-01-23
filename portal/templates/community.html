@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 <html>
 <head>
-  <title>LEAP Login</title>
+  <title>{%block title%}Community{%endblock%}</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css">
@@ -9,7 +9,6 @@
 .gallery > div {float:left; margin: 20px;}
 img{box-shadow: 10px 10px 5px #888888;
 border-radius:300px;}
-
   </style>
   </head>
   <body>
@@ -21,16 +20,16 @@ border-radius:300px;}
   <div class=" fade-in two">
    <h5 style="font-family: 'Roboto', sans-serif; color:#1976d2;" align="center" >Community is a place where you will find all the organisation which are connected to you through LEAP. It joins different organisations which share common values or common beliefs.</h5>
   </div><br><br>
-  <div class="gallery">
+  <div class=" fade-in two">
+	<div class="row">
     {%for u in pu%}
-   <div class="fade-in three">
+      <div class="col s12 l3 m3"><a href="/profile/{{u.user.username}}"><img class="responsive-img" src="{{u.image.url}}"></a></div>
 
-    <a href = "/profile/{{u.user.username}}"><img src="{{u.image.url}}" /></a>
-    {{u.orgname}}
+    {%endfor%}
+
+    {% endblock %}
     </div>
-{%endfor%}
+	</div>
 </div>
-</div>
-{% endblock %}
 </body>
 </html>

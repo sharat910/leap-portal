@@ -56,6 +56,15 @@ class QueryForm(forms.ModelForm):
 		body = self.cleaned_data.get('body')
 		return body
 
+class SearchForm(forms.Form):
+	body = forms.CharField(label=(u'Search'), required = True)
+
+	def clean_body(self):
+		body = self.cleaned_data.get('body')
+		return body
+
+	layout = Layout('body',)
+
 class EventForm(forms.ModelForm):
 	class Meta:
 		model = Event
@@ -64,4 +73,14 @@ class EventForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Project
+		exclude = ('user',)
+
+class AlumniForm(forms.ModelForm):
+	class Meta:
+		model = Alumni
+		exclude = ('user',)
+
+class MediaForm(forms.ModelForm):
+	class Meta:
+		model = Media
 		exclude = ('user',)

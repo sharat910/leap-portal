@@ -13,13 +13,27 @@
   </style>
   </head>
   <body>
+    <ul id="dropdown2" class="dropdown-content">
+  <li><a href="/queries/" style="color:#000; background-color: #fff;">All Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/myqueries/" style="color:#000; background-color: #fff;">My Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/search/" style="color:#000; background-color: #fff;">Search</a></li>
+  </ul>
+  <ul id="dropdown1" class="dropdown-content">
+  <li><a href="/queries/" style="color:#000; background-color: #fff;">All Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/myqueries/" style="color:#000; background-color: #fff;">My Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/search/" style="color:#000; background-color: #fff;">Search</a></li>
+  </ul>
  <nav class = "blue darken-1">
 <div class="nav-wrapper">
 <a href="#" class="brand-logo" style="padding-left:10%; font-size:44px;">LEAP</a>
 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
   <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right:14%;">
     <li><a href="/home/" style="font-size:20px;">Home</a></li>
-      <li><a href="/queries/" style="font-size:20px;">Queries</a></li>
+    <li><a class="dropdown-button tt" href="#!" data-activates="dropdown2" style="font-size:20px;">Queries</a></li>
     <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
     <li><a href="/community/" style="font-size:20px;">Community</a></li>
     <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
@@ -27,7 +41,7 @@
   </ul>
 <ul class="side-nav" id="mobile-demo">
     <li><a href="/home/" style="font-size:20px;">Home</a></li>
-      <li><a href="/queries/" style="font-size:20px;">Queries</a></li>
+  <li><a class="dropdown-button tt" href="#!" data-activates="dropdown1" style="font-size:20px;">Queries</a></li>
     <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
     <li><a href="/community/" style="font-size:20px;">Community</a></li>
     <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
@@ -51,6 +65,7 @@
   </div>
 </div></div></div>
 <br>
+
  <div class="card-panel white">
 <div class="row">
   {%for query in queries%}
@@ -72,12 +87,12 @@
   </button>	</div>
   <div id = answers{{query.id}}>
 
-
+{% if query.get_answers %}
 	<ul class="collapsible" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header"><i class="material-icons">answer</i>Show all answers</div>
-    {%for answer in answers%}
-    {%if answer.query == query %}
+      <div class="collapsible-header"><i class="material-icons">comment</i>Show all answers</div>
+
+    {%for answer in query.get_answers %}
     <div class="collapsible-body">
     <p>
     {{answer.body}}
@@ -85,10 +100,11 @@
     {{answer.user.orgname}}
     </div>
   </p>
-    {%endif%}
     {%endfor%}
     </li>
 	</ul>
+
+  {% endif %}
   </div>
   </div>
 	</div>
@@ -135,5 +151,17 @@ function createtask(e){
 		}
 	});
 }
+</script>
+<script>
+   $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: true,
+      hover: true,
+      gutter: 0,
+      belowOrigin: true,
+      alignment: 'left'
+    }
+  );
 </script>
 </html>
