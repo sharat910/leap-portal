@@ -10,7 +10,7 @@ class RegistrationForm(ModelForm):
 
 	class Meta:
 		model = Puser
-		exclude = ('user','joineddate')
+		exclude = ('user','joineddate','designation')
 
 	def clean_username(self):
 		username = self.cleaned_data['username']
@@ -25,6 +25,12 @@ class RegistrationForm(ModelForm):
 	def clean_password(self):
 		password = self.cleaned_data['password']
 		return password
+
+class PuserForm(ModelForm):
+	class Meta:
+		model = Puser
+		exclude = ('user','joineddate','designation',)
+
 
 class LoginForm(forms.Form):
 	username = forms.CharField(label = (u'UserName'),required = True)

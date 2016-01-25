@@ -23,7 +23,7 @@ border-radius:300px;}
   <div class=" fade-in two">
 	<div class="row">
     {%for u in pu%}
-      <div class="col s12 l3 m3"><a href="/profile/{{u.user.username}}"><img class="responsive-img" src="{{u.image.url}}"></a></div>
+      <div class="col s12 l3 m3"><a href="/profile/{{u.user.username}}"><img class="responsive-img" src="{{u.image.url}}">{{u.user.username}}</a></div>
 
     {%endfor%}
 

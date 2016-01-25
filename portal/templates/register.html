@@ -11,7 +11,7 @@
  <div class="card-panel white " style="width: 35%; position:absolute; top:10%; left: 33%; height: auto;">
    <h4 align="center"> Leap Portal </h4>
   <div class="inside" style="padding-top: 5%; padding-left: 15%;">
-<form method="POST" class="viewform">{% csrf_token %}
+<form method="POST" enctype="multipart/form-data" >{% csrf_token %}
    {% form %}
         {% endform %}
    <div style="padding-left: 25%; padding-top: 7%;">

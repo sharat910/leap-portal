@@ -1,8 +1,19 @@
+{% extends "base.html" %}
 <html>
 <head>
-  <title>Sorry!</title>
+  <title>{%block title%}Sorry!{%endblock%}</title>
 </head>
 <body>
-  <p> Sorry you do not have sufficient permissions</p>
+  {%block body%}
+  <div class="card-panel white " style="width: 65%; position:absolute; top:22%; left: 18%; height:auto;">
+    <h4 align="center">OOPS!</h4>
+   <div class="inside" style="padding-top: 5%; padding-left: 5%;">
+      <div class="row">
+<p align="center" style="color:#0d47a1; font-size:18px;"> You do not have appropriate permission to access this page <br><br><br>
+<a href="/home/">Click Here </a><span style="color:#000000;">to go back</span></p>
+  </div>
+  </div>
+  </div>
+  {%endblock%}
 </body>
 </html>

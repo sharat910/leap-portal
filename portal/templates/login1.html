@@ -1,14 +1,28 @@
 {% load material_form %}
+{% load staticfiles %}
 <html>
 <head>
  <title>LogIn | Leap</title>
  {% include 'material/includes/material_css.html' %}
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    {% include 'material/includes/material_js.html' %}
-</head>
-<body>
- <div class="card-panel white " style="width: 35%; position:absolute; top:20%; left: 33%; height: auto;">
-   <h4 align="center"> Leap Portal </h4>
+   <style type="text/css">
+   body{
+    min-height: 100vh;
+    flex-direction: column;
+	overflow:hidden;
+	background-color:#64b5f6;
+  }
+  #main {
+    flex: 1 0 auto;
+  }
+  </style>
+    </head>
+ <body>
+  <img src="/media/nss-logo.png" class="responsive-img" align="left">
+  <img src="/media/logo.png" class="responsive-img" align="right">
+ <div class="card-panel white " style="width: 35%; position:absolute; top:18%; left: 33%; height: auto;">
+   <h4 align="center" style="color:#000000;"> Leap Portal </h4>
   <div class="inside" style="padding-top: 5%; padding-left: 15%;">
 <form method="POST" class="viewform">{% csrf_token %}
    {% form %}
@@ -18,14 +32,21 @@
    {% endform %}
    <div style="padding-left: 25%; padding-top: 7%;">
    <button class="btn waves-effect waves-light" type="submit" name="action" style="background-color:#0d47a1;">Login
- </button>
+ </button><br><br>
  <a href="/register">Click here to register</a>
  </div>
-</form>i
-
+</form>
  </div>
  </div>
  </div>
+ <footer class="page-foter black">
+          <div class="footer-copyright" style="position:absolute; bottom:0; background-color:#fff; width:100%; height:7%; border-top:thick inset #0d47a1;">
+            <div class="container" style="padding-top:0.8%;">
+            <span style="color:#0d47a1; font-size:16px;">2016 LEAP</span>
+            <span class="blue-text text-darken-4 right">Developers: <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Front-End Designer and Developer" href="https://www.facebook.com/profile.php?id=100007142927829" style="color:#0d47a1;"><u>Prakhar Agarwal</u></a> and  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Back-End Developer" href="https://www.facebook.com/sharat.chandra.980?fref=ts" style="color:#0d47a1;"><u>Sharat Chandra</u></a></span>
+			</div>
+          </div>
+        </footer>
  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
  <script type="text/javascript" src="js/materialize.min.js"></script>
  <script type="text/javascript">

@@ -5,12 +5,12 @@ from .validators import validate_file_extension
 
 class Puser(models.Model):
 	orgname = models.CharField(max_length=100)
-	image = models.FileField(upload_to='images/%Y/%m/%d',blank=True)
+	image = models.FileField(upload_to='images/%Y/%m/%d',blank=False)
 	email = models.EmailField()
 	joineddate = models.DateField(auto_now_add = True)
 	user = models.OneToOneField(User)
 	location = models.CharField(max_length=100)
-	designation = models.CharField(max_length=200)
+	designation = models.CharField(max_length=200,blank = True,null = True)
 	institution = models.CharField(max_length=200)
 	contact = models.IntegerField(blank=True, null=True)
 	weblink = models.CharField(max_length=200,null = True,blank = True)

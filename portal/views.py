@@ -17,13 +17,14 @@ def PuserRegistration(request):
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/home/')
 	if request.method == 'POST':
-		form = RegistrationForm(request.POST)
+		form = RegistrationForm(request.POST,request.FILES)
 		if form.is_valid():
 			user = User.objects.create_user(username = form.cleaned_data['username'],password = form.cleaned_data['password'])
 			user.save()
 			stu = Puser( user =user,
 						 orgname = form.cleaned_data['orgname'],
 						 email = form.cleaned_data['email'],
+						 image = request.FILES.get('image', False),
 						 designation = form.cleaned_data['designation'],
 						 location=form.cleaned_data['location'],
 						 institution = form.cleaned_data['institution'],
@@ -304,7 +305,7 @@ def ProfileView(request,username):
 
 @login_required
 def MentorView(request):
-	u = User.objects.get(username = username)
+	u = request.user
 	pu = Puser.objects.get(user = u)
 	context = {'pu':pu,}
 	return render_to_response('mentor.html',context,context_instance  = RequestContext(request))
@@ -318,7 +319,7 @@ def EditPostView(request,id):
 		if form.is_valid():
 			form.save()
 			print "edit post saved"
-			return HttpResponseRedirect('/posts/')
+			return HttpResponseRedirect('/home/')
 
 		context = {
 		'post':post,
@@ -326,12 +327,12 @@ def EditPostView(request,id):
 		}
 		return render_to_response('editpost.html',context,context_instance  = RequestContext(request))
 	else:
-		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+		return render_to_response('sorry.html')
 
 def EditQueryView(request,id):
 	query = get_object_or_404(Query,pk = id)
 	if request.user == query.user.user:
-		form = QueryForm(request.POST or None,instance = post)
+		form = QueryForm(request.POST or None,instance = query)
 		if form.is_valid():
 			form.save()
 			print "edit query saved"
@@ -343,12 +344,30 @@ def EditQueryView(request,id):
 		}
 		return render_to_response('editquery.html',context,context_instance  = RequestContext(request))
 	else:
-		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+		return render_to_response('sorry.html')
+
+def EditProfileView(request,username):
+	u = User.objects.get(username = username)
+	pu = Puser.objects.get(user = u)
+	if request.user == pu.user:
+		form = PuserForm(request.POST or None,request.FILES or None,instance = pu)
+		if form.is_valid():
+			form.save()
+			print "edit query saved"
+			return HttpResponseRedirect('/profile/' +  u.username)
+
+		context = {
+		'pu':pu,
+		'form':form
+		}
+		return render_to_response('editprofile.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html')
 
 def EditEventView(request,id):
 	event = get_object_or_404(Event,pk = id)
 	if request.user == event.user.user:
-		form = EventForm(request.POST or None,instance = post)
+		form = EventForm(request.POST or None,instance = event)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/profile/' + str(request.user.username))
@@ -358,14 +377,14 @@ def EditEventView(request,id):
 		'form':form,
 		'value':value
 		}
-		return render_to_response('event.html',context,context_instance  = RequestContext(request))
+		return render_to_response('editevent.html',context,context_instance  = RequestContext(request))
 	else:
-		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+		return render_to_response('sorry.html')
 
 def EditProjectView(request,id):
 	project = get_object_or_404(Project,pk = id)
 	if request.user == project.user.user:
-		form = EventForm(request.POST or None,instance = post)
+		form = EventForm(request.POST or None,instance = project)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/profile/' + str(request.user.username))
@@ -375,9 +394,9 @@ def EditProjectView(request,id):
 		'form':form,
 		'value':value
 		}
-		return render_to_response('project.html',context,context_instance  = RequestContext(request))
+		return render_to_response('editproject.html',context,context_instance  = RequestContext(request))
 	else:
-		return render_to_response('sorry.html',context,context_instance  = RequestContext(request))
+		return render_to_response('sorry.html')
 
 def CommunityView(request):
 	pu = Puser.objects.all()
