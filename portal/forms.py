@@ -38,6 +38,12 @@ class LoginForm(forms.Form):
 
 	layout = Layout('username','password')
 
+class PassForm(forms.Form):
+	username = forms.CharField(label = (u'UserName'),required = True)
+	password = forms.CharField(label = (u'NewPassword'), widget = forms.PasswordInput(render_value = False),required = True)
+
+	layout = Layout('username','password')
+
 class PostForm(forms.ModelForm):
 	body = forms.CharField(label=(u'Post'), required = True,widget=forms.Textarea)
 

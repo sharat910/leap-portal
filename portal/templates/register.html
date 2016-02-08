@@ -2,14 +2,33 @@
 {% load material_form %}
 <html>
 <head>
- <title>Profile</title>
+ <title>{%block title%}Register{%endblock%}</title>
  {% include 'material/includes/material_css.html' %}
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    {% include 'material/includes/material_js.html' %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="icon" href="/media/fav.png" type="image/png">
+<style type="text/css">
+   body{
+    min-height: 100vh;
+    flex-direction: column;
+	background-color:#90caf9;
+
+}
+  #main {
+    flex: 1 0 auto;
+  }
+  </style>
 </head>
 <body>
+<div id="introimages">
+  <img src="/media/nss-logo.png" class="responsive-img" align="left">
+  <img src="/media/logo.png" class="responsive-img" align="right">
+</div>
+<div class="container">
+<div class="form3">
  <div class="card-panel white " style="width: 35%; position:absolute; top:10%; left: 33%; height: auto;">
-   <h4 align="center"> Leap Portal </h4>
+   <h4 align="center" style="color:#0d47a1;"> Leap Portal </h4>
   <div class="inside" style="padding-top: 5%; padding-left: 15%;">
 <form method="POST" enctype="multipart/form-data" >{% csrf_token %}
    {% form %}
@@ -19,12 +38,21 @@
  </button>
  </div>
 </form>
-
-
  </div>
-   <br>
  </div>
-
+</div>
+</div>
+<div class="footer2" style="padding-top:78%;">
+ <footer class="page-foter black">
+          <div class="footer-copyright" style="background-color:#fff; height:7%; border-top:thick inset #0d47a1;">
+            <div class="container" style="padding-top:0.8%;">
+            <span style="color:#0d47a1; font-size:16px;">2016 LEAP</span>
+            <span class="blue-text text-darken-4 right">Developers: <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Front-End Designer and Developer" href="https://www.facebook.com/profile.php?id=100007142927829" style="color:#0d47a1;"><u>Prakhar Agarwal</u></a> and  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Back-End Developer" href="https://www.facebook.com/sharat.chandra.980?fref=ts" style="color:#0d47a1;"><u>Sharat Chandra</u></a></span>
+			</div>
+          </div>
+        </footer>
+</div>
+</div>
  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
  <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
  <script type="text/javascript">

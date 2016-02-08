@@ -1,0 +1,79 @@
+{% load staticfiles %}
+{% load material_form %}
+<html>
+<head>
+  <title>{%block title%}Base{%endblock%}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link type="text/css" rel="stylesheet" href={% static 'css/materialize.min.css'%}  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href={% static 'css/style.css'%} >
+<link rel="icon" href="/media/fav.png" type="image/png">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  {% include 'material/includes/material_css.html' %}
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  {% include 'material/includes/material_js.html' %}
+  <style type="text/css">
+    background-color:#e0e0e0;
+background-image:url(/media/background-pattern-design-79.jpg)}
+  </style>
+  </head>
+  <body>
+    <ul id="dropdown2" class="dropdown-content">
+  <li><a href="/queries/" style="color:#000; background-color: #fff;">All Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/myqueries/" style="color:#000; background-color: #fff;">My Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/search/" style="color:#000; background-color: #fff;">Search</a></li>
+  </ul>
+  <ul id="dropdown1" class="dropdown-content">
+  <li><a href="/queries/" style="color:#000; background-color: #fff;">All Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/myqueries/" style="color:#000; background-color: #fff;">My Queries</a></li>
+  <li class="divider"></li>
+  <li><a href="/search/" style="color:#000; background-color: #fff;">Search</a></li>
+  </ul>
+<nav class = "blue darken-4">
+    <div class="nav-wrapper">
+	  <a href="#" class="brand-logo" style="padding-left:10%; font-size:44px;"><img src="/media/logo.png" class="responsive-img"></a>
+	  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right:14%;">
+        <li><a href="/home/" style="font-size:20px;">Home</a></li>
+        <li> <a class='dropdown-button tt' href='/queries/' data-activates='dropdown2' style="font-size:20px;">Queries<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
+        <li><a href="/community/" style="font-size:20px;">Community</a></li>
+        <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
+<li><a href="/logout/" style="font-size:20px;">About Us</a></li>
+        <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+      </ul>
+	  <ul class="side-nav" id="mobile-demo">
+        <li><a href="/home/" style="font-size:20px;">Home</a></li>
+        <li> <a class='dropdown-button tt' href='/queries/' data-activates='dropdown1' style="font-size:20px;">Query</a></li>
+        <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
+        <li><a href="/community/" style="font-size:20px;">Community</a></li>
+        <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
+        <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<body>
+  {%block body%}
+
+  {% endblock %}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>
+  <script>
+     $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: true,
+        hover: true,
+        gutter: 0,
+        belowOrigin: true,
+        alignment: 'left'
+      }
+    );
+  </script>
+</body>
+
+</html>

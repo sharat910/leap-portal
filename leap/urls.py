@@ -23,6 +23,7 @@ urlpatterns = patterns('portal.views',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/$','PuserRegistration'),
     url(r'^login/$','LoginRequest'),
+    url(r'^changepass/$','PassChangeView'),
     url(r'^logout/$','LogoutRequest'),
     url(r'^$','StartPage'),
     url(r'^home/$','PostsView'),
@@ -43,7 +44,9 @@ urlpatterns = patterns('portal.views',
     url(r'^editquery/(?P<id>\d+)$','EditQueryView'),
     url(r'^editevent/(?P<id>\d+)$','EditEventView'),
     url(r'^editproject/(?P<id>\d+)$','EditProjectView'),
-
+    url(r'^editalumni/(?P<id>\d+)$','EditAlumniView'),
+    url(r'^editmedia/(?P<id>\d+)$','EditMediaView'),
+    url(r'^aboutus/$','AboutusView'),
 
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

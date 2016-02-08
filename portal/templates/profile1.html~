@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+<html>
+<head>
+<title>{%block title%}Profile{%endblock%}</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<style type="text/css">
+  body{background-image:url(/media/background-pattern-design-79.jpg)}
+  </style>
+  </head>
+  <body>
+    {%block body%}
+  <div id="textarea">
+    <div class=" fade-in one">
+ <div class="card-panel white">
+ <div class="row">
+      <div class="col s4" style="padding-top:5%;"><img src="{{pu.image.url}}" class="responsive-img"></div>
+      <div class="col s8" style="padding-left:4%;"><p style="font-size:27px; font-weight:bold;" id="id_name">{{pu.orgname}}<br></p>
+	  <span style="font-weight:bold; font-size:22px;">Institution Name:</span> <span style="font-size:18px; font-weight:bold;"  id="id_institutionname"> {{pu.institution}}</span>
+<br>	  <span style="font-weight:bold; font-size:22px;">Location:</span> <span style="font-size:18px;"  id="id_location"> {{pu.location}}</span>
+<br>	  <span style="font-weight:bold; font-size:22px;">Contact</span> <span style="font-size:18px;"  id="id_contact"> {{pu.contact}}</span>
+{% if pu.weblink %}<br>	  <span style="font-weight:bold; font-size:22px;">Website Link:</span> <span style="font-size:18px;"  id="id_weblink"> {{pu.weblink}}</span>{%endif%}
+{% if pu.fbprofile %}<br>	  <span style="font-weight:bold; font-size:18px;">FB profile:</span> <span style="font-size:18px;"  id="id_fbprofile"> {{pu.fbprofile}}</span>{%endif%}
+
+<br>	  <span style="font-weight:bold; font-size:18px;">E-mail:</span> <span style="font-size:20px;"  id="id_email"> {{pu.email}}</span>
+ <div style="position:relative; padding-left:90%;">
+  <a class="btn-floating btn-large waves-effect waves-light blue" href="/editprofile/{{pu.user.username}}"><i class="material-icons">mode_edit</i></a>
+      </div>  
+	  </div>
+  </div>
+  </div><br>
+  {% if request.user == pu.user %}
+  <div class=" fade-in two">
+  </div><br>
+{% endif %}
+
+  {% if projects %}
+    <div class=" fade-in two">
+    <div class="card-panel white">
+<span class = "section">
+    <h4 align = "center" style="color:#000000;"><u>Projects</u><br><br></h4>
+
+      {% for project in projects %}
+
+		<h4 align="center" style="color:#000000;">{{project.name}}<br></h4>
+	<ul type="disc">
+	<li>
+    <p align="left"> <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Project Title:</span> <span style="font-size:21px; "  id="id_projectname"> BITS Pilani</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{project.description}}</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Achievements:</span> <span style="font-size:16px;"  id="id_achievement"> {{project.achievements}}</span>
+<br>    <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Team Strength:</span> <span style="font-size:16px;"  id="id_teamstrength"> {{project.teamstrength}}</span>
+        <span style="font-weight:lighter; font-size:20px; font-weight:bold;">  | Working Area:</span> <span style="font-size:16px;"  id="id_workingarea"> {{project.workingarea}}</span>
+
+      {% if not project.details.url == '/media/False' %}
+      <br><span style="font-weight:lighter; font-size:20px; font-weight:bold;">Attachment:</span> <a href = {{project.details.url}}>Details</a><br>
+
+      {% endif %}
+<div style="position:relative; padding-left:90%;">
+  <a class="btn-floating btn-large waves-effect waves-light blue" href="/editproject/{{pu.project.id}}"><i class="material-icons">mode_edit</i></a>
+      </div><br>
+<div class="divider"></div>
+ </p></li>
+</ul>
+	{% endfor %}
+<a href="/addproject/" style="font-size:15px; color:#0d47a1;">Add Project</a>
+  </div>
+
+  </div><br>
+  {% endif %}
+  {%if events%}
+    <div class=" fade-in three">
+    <div class="card-panel white">
+<span class = "section">
+    <h4 align = "center" style="color:#000000;"><u>Events</u><br><br></h4>
+    {% for event in events %}
+		<h4 align="center" style="color:#000000;">{{event.name}} <br></h4>
+<div class = "row">
+<div class = "col s6">
+	    <p align="left"> <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Title:</span> <span style="font-size:22px;"  id="id_eventname"> {{event.name}}</span>
+<br>	  <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{event.description}} </span>
+<br>  {% if event.details %}
+{% if not event.details.url == '/media/False'%}
+<span style="font-weight:lighter; font-size:20px; font-weight:bold;">Attachment: </span><a href = {{event.details.url}}>Details</a><br>
+{%endif%}{%endif%}
+ </p>
+<div style="position:relative; padding-left:0%;">
+  <a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">mode_edit</i></a>
+      </div></div>
+<div class = "col s6">
+<div class="row">
+    <div class="col s12 m3 l2"><p>s12</p></div>
+    <div class="col s12 m3 l2"><p>s12 m4</p></div>
+    <div class="col s12 m3 l2"><p>s12 m4</p></div>
+    <div class="col s12 m3 l2"><p>s12 m4</p></div>
+<div class="col s12 m3 l2"><p>s12 m4</p></div>
+<div class="col s12 m3 l2"><p>s12 m4</p></div>
+  </div>
+</div>
+</div>
+ <div class="divider"></div><br>
+{%endfor%}
+<a href="/addevents/" style="font-size:15px; color:#0d47a1;">Add Event</a>
+  </div>
+  </div>
+{% endif %}
+<br>
+{%if alumni%}
+  <div class=" fade-in three">
+  <div class="card-panel white">
+<span class = "section">
+  <h4 align = "center" style="color:#000000;"><u>Notable Alumni</u><br><br></h4>
+
+  {% for a in alumni %}
+  <h4 align="center" style="color:#000000;">{{alumni.name}} <span id = "id_number">{{a.name}}<br></h4>
+<ul type="disc">
+<li>
+<span style="font-weight:lighter; font-size:20px; font-weight:bold;">About:</span> <span style="font-size:16px;"  id="id_description"> {{a.about}} </span>
+</li>
+<div style="position:relative; padding-left:90%;">
+  <a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">mode_edit</i></a>
+      </div>
+<br>
+<div class="divider"></div>
+</ul>
+
+{%endfor%}
+<a href="/addalumnus/" style="font-size:15px; color:#0d47a1;">Add Alumnus</a>
+</div>
+</div>
+{% endif %}
+
+<br>
+{%if media%}
+  <div class=" fade-in three">
+  <div class="card-panel white">
+<span class = "section">
+  <h4 align = "center" style="color:#000000;"><u>Media Publications</u><br><br></h4>
+  {% for med in media %}
+  <h4 align="center" style="color:#000000;">{{med.title}} <span id = "id_number"><br></h4>
+<ul type="disc">
+<li>
+  <p align="left"><span style="font-weight:lighter; font-size:20px; font-weight:bold;">Description:</span> <span style="font-size:16px;"  id="id_description"> {{med.description}} </span>
+ </span>
+<br>    <span style="font-weight:lighter; font-size:20px; font-weight:bold;">Link:</span> <span style="font-size:16px;"  id="id_description"> {{med.link}} </span>
+</span>
+</p></li>
+<div style="position:relative; padding-left:90%;">
+  <a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">mode_edit</i></a>
+      </div><br>
+<div class="divider"></div>
+
+</ul>
+
+{%endfor%}
+<a href="/addmedia/" style="font-size:15px; color:#0d47a1;">Add Media Publications</a>
+</div>
+
+</div>
+{% endif %}
+
+
+
+</div></div>
+<br>
+    {% endblock %}
+</body>
+  <script type="text/javascript">
+  </script>
+  <script>
+
+    $(".button-collapse").sideNav();
+
+	</script>
+  <script>
+  $(document).ready(function(){
+      $('.modal-trigger').leanModal();
+    });
+   </script>
+</html>

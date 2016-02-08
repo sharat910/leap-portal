@@ -8,22 +8,23 @@
   body{background-color:#f3f2f2;}
 .gallery > div {float:left; margin: 20px;}
 img{box-shadow: 10px 10px 5px #888888;
-border-radius:300px;}
+border-radius:300px;
+height:200px;}
   </style>
   </head>
   <body>
     {%block body%}
 <div class="container">
   <div class=" fade-in one">
-   <h1 style="font-family: 'Roboto', sans-serif; color:#1976d2;" align="center" >Community</h1>
+   <h1 style="font-family: 'Roboto', sans-serif; color:#fff;" align="center" >Community</h1>
   </div>
   <div class=" fade-in two">
-   <h5 style="font-family: 'Roboto', sans-serif; color:#1976d2;" align="center" >Community is a place where you will find all the organisation which are connected to you through LEAP. It joins different organisations which share common values or common beliefs.</h5>
+   <h5 style="font-family: 'Roboto', sans-serif; color:#fff;" align="center" >Community is a place where you will find all the organisation which are connected to you through LEAP. It joins different organisations which share common values or common beliefs.</h5>
   </div><br><br>
   <div class=" fade-in two">
 	<div class="row">
     {%for u in pu%}
-      <div class="col s12 l3 m3"><a href="/profile/{{u.user.username}}"><img class="responsive-img" src="{{u.image.url}}">{{u.user.username}}</a></div>
+      <div class="col s12 l3 m3"><a href="/profile/{{u.user.username}}" style="color:#fff;"><img class="responsive-img" style="height:200px; margin-top:20px;"  src="{{u.image.url}}"><p align="center" style="text-transform: uppercase; font-family: 'Roboto', sans-serif; font-size:20px;">{{u.user.username}}</p></a></div>
 
     {%endfor%}
 

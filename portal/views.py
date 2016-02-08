@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import json
 from django.db.models import Q
+from django.core.exceptions import SuspiciousOperation
 
 # Create your views here.
 
@@ -25,7 +26,7 @@ def PuserRegistration(request):
 						 orgname = form.cleaned_data['orgname'],
 						 email = form.cleaned_data['email'],
 						 image = request.FILES.get('image', False),
-						 designation = form.cleaned_data['designation'],
+						 #designation = form.cleaned_data['designation'],
 						 location=form.cleaned_data['location'],
 						 institution = form.cleaned_data['institution'],
 						)
@@ -38,6 +39,20 @@ def PuserRegistration(request):
 		form = RegistrationForm()
 		context = {'form' : form}
 		return render_to_response('register.html',context,context_instance = RequestContext(request))
+
+def PassChangeView(request):
+	form = PassForm(request.POST or None)
+	if form.is_valid():
+		username = form.cleaned_data['username']
+		password = form.cleaned_data['password']
+		try:
+			u = User.objects.get(username__exact=username)
+			u.set_password(password)
+			u.save()
+		except:
+			raise SuspiciousOperation("Invalid username. Such a user doesn't exist.")
+		return HttpResponseRedirect('/login/')
+	return render_to_response('changepass.html',{'form':form},context_instance = RequestContext(request))
 
 def LoginRequest(request):
 	if request.user.is_authenticated():
@@ -310,6 +325,10 @@ def MentorView(request):
 	context = {'pu':pu,}
 	return render_to_response('mentor.html',context,context_instance  = RequestContext(request))
 
+def AboutusView(request):
+	return render_to_response('about.html')
+
+
 ##EDIT VIEWS
 
 def EditPostView(request,id):
@@ -384,7 +403,7 @@ def EditEventView(request,id):
 def EditProjectView(request,id):
 	project = get_object_or_404(Project,pk = id)
 	if request.user == project.user.user:
-		form = EventForm(request.POST or None,instance = project)
+		form = ProjectForm(request.POST or None,instance = project)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/profile/' + str(request.user.username))
@@ -395,6 +414,41 @@ def EditProjectView(request,id):
 		'value':value
 		}
 		return render_to_response('editproject.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html')
+
+def EditAlumniView(request,id):
+	alumnus = get_object_or_404(Alumni,pk = id)
+	if request.user == alumnus.user.user:
+		form = AlumniForm(request.POST or None,instance = alumnus)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/profile/' + str(request.user.username))
+		value = "Update Alumnus"
+		context = {
+		'alumnus':alumnus,
+		'form':form,
+		'value':value
+		}
+		return render_to_response('editalumnus.html',context,context_instance  = RequestContext(request))
+	else:
+		return render_to_response('sorry.html')
+
+
+def EditMediaView(request,id):
+	media = get_object_or_404(Media,pk = id)
+	if request.user == media.user.user:
+		form = MediaForm(request.POST or None,instance = media)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/profile/' + str(request.user.username))
+		value = "Update Media"
+		context = {
+		'media':media,
+		'form':form,
+		'value':value
+		}
+		return render_to_response('editmedia.html',context,context_instance  = RequestContext(request))
 	else:
 		return render_to_response('sorry.html')
 

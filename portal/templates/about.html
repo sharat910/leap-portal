@@ -1,0 +1,117 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+	<title>LEAP - YouthCon</title>
+	<script type="text/javascript" src={% static "jquery.js" %}></script>
+	<script type='text/javascript' src={% static "jquery.particleground.min.js" %}></script>
+	<script type="text/javascript" src={% static "jquery.fullpage.min.js" %}></script>
+	<script src={% static "modernizr.js" %}></script> <!-- Modernizr -->
+	<link rel="stylesheet" type="text/css" href={% static "style.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "jquery.fullpage.min.css" %}>
+    <link rel="icon" href="/media/fav.png" type="image/png">
+<link href='https://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald" />
+	<link rel="stylesheet" href={% static "animate.css" %}>
+	<script src={% static "wow.min.js" %}></script>
+              <script>
+              new WOW().init();
+              </script>
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+	    $('body').particleground({
+    	dotColor: '#cdc9c9',
+    	lineColor: '#cdc9c9',
+    	density: '8000',
+    	maxSpeedX: 0.5,
+    	maxSpeedY: 0.5,
+  		});});
+	$(document).ready(function() {
+   		$('#fullpage').fullpage({
+   		 sectionsColor: ['none', 'rgba(89, 196, 197,0.5)','rgba(0, 200, 248,0.3)', 'rgba(255,195,60,0.5)','rgba(251,226,180,0.5)','rgba(179, 136, 255,0.5)','rgba(240,241,238,0.5)'],
+
+ anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
+   		 onLeave: function(index, nextIndex, direction){
+        var pass= "#section" + nextIndex;
+
+        var ele= document.getElementById(pass);
+        asscls(ele);
+        }
+		});
+		});
+	</script>
+	<style type="text/css">
+	#fullpage{overflow-y:scroll;
+	overflow-x:hidden;}
+	</style>
+</head>
+<body>
+<div id="fullpage">
+<div class="section">
+	<div id="sec1head" class="head">About LEAP</div>
+	<div id="sec1text" class="info">
+		Leading Endeavour to Achieve Progress (LEAP) is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.
+	</div>
+</div>
+
+<div class="section">
+	<div class="head">Motivation</div>
+	<div class="info">
+		As we today stand to herald the new era of change, we should look back into our rich history, our great triumphs and more importantly of our failures. Those iconic moments gives us foresight and power to improve our future performances. It is thus imperative to the society that any organization�s contribution towards development should not be hindered by its own inabilities. Ideas, Innovations and solutions that can answer emerging social glitches can have better impact if we come together and fight cancers inside us.
+	</div>
+</div>
+
+<div class="section">
+	<div class="head">Objective</div>
+	<div class="info">
+		Numerous student led societies have enough volunteer strength, funds and team dedication, but they fail to create a significant impact. It is thus the need of the hour to have a society joining hands and working together to convert all the whispers into roars. A common platform for like minded volunteer society, connecting them through the will to bring about a change, is what we are working for. It aims to create a larger impact on the society, that are ultimate beneficiaries of actions, they perform.
+	</div>
+</div>
+
+<div class="section">
+		<div class="head ss">Mentorship</div>
+		<div class="info">
+			Being student-led organization it is difficult to predict the impact of our actions and plan for long terms. Mentorship will be provided to selected societies throughout the year,for their significant progress.
+		</div>
+		</div>
+		<div class="section">
+		<div class="head ss">The LEAP Portal</div>
+		<div class="info">
+			Several times, organizations want to try new initiatives and need great pool of suggestions. This is, one of the many reasons to have a common networking platform for such associations. Having a pool of resources and data including reports is what will make life easier to swim through the existing sea of the knowledge. The LEAP portal aims to form an interactive community of all such student led societies which are working with the aim of development. Portal provides data on the ongoing working of various societies, their contact details, new initiatives and collaboration offers etc. Suggestions can also be exchanged via this platform.
+		</div>
+	</div>
+	<div class="section">
+		<div class="head ss">Youth Conference</div>
+		<div class="info">
+			An annual assemblage of all the participating organization to discuss the progress and building a strong relationship is the motive behind youth conference. Apart from the convention involving various societies, we will also have our on-board mentors during the conference. Sharing their vast experience and knowledge through a panel discussion and mentoring sessions, we are sure of taking the step of converting the bright sparks to blazing flames of honour.
+		</div>
+	</div>
+<div class="section">
+	<div class="head">Contact</div>
+	<div class="info" style="text-align:center;">
+		Contact us: +91 77288359554<br>
+		Write us at: <a href="mailto:leapbits@gmail.com">leapbits@gmail.com</a><br>
+		Follow us on <a href="https://www.facebook.com/YouthConPilani/">Facebook</a>
+	</div>
+</div>
+<div class="section">
+	<div id="sec1head" class="head">Our Team</div>
+	<div id="sec1text" class="info">
+		Do we require this section or not?
+	</div>
+</div>
+</div>
+<script src={% static "main.js" %}></script> <!-- Resource jQuery -->
+<script type="text/javascript">
+	function asscls(div) {
+		$(".active").removeClass("active");
+		var className=div.getAttribute("class");
+		div.className="active";
+	};
+</script>
+</body>
+</html>
