@@ -39,8 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portal',
-    # 'crispy_forms',
-    # 'endless_pagination',
     'material',
     'material.frontend',
     'material.admin',
