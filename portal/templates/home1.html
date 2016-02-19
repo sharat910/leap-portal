@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css">
-  body{background-image:url(/media/background-pattern-design-79.jpg)}
+  body{background-color:#eee;}
 .input-field label{color:#000000;}
 textarea.materialize-textarea:focus:not([readonly]){border-bottom: 1px solid #0d47a1;
      box-shadow: 0 1px 0 0 #0d47a1;}
@@ -42,26 +42,32 @@ textarea.materialize-textarea {
 <a href="#" class="brand-logo" style="padding-left:10%; font-size:44px;"><img src="/media/logo.png" class="responsive-img"></a>
 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
   <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right:14%;">
-    <li><a href="/home/" style="font-size:20px;">Home</a></li>
-    <li><a class='dropdown-button tt' href='#' data-activates='dropdown2' style="font-size:20px;">Queries<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
-    <li><a href="/community/" style="font-size:20px;">Community</a></li>
-    <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
-<li><a href="/aboutus/" style="font-size:20px;">About Us</a></li>
-    <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+    <li><a href="/home/" style="font-size:17px;">Home</a></li>
+    <li><a class='dropdown-button tt' href='#' data-activates='dropdown2' style="font-size:17px;">Queries<i class="material-icons right">arrow_drop_down</i></a></li>
+    <li><a href="/profile/{{request.user.username}}" style="font-size:17px;">Profile</a></li>
+    <li><a href="/community/" style="font-size:17px;">Community</a></li>
+    <li><a href="/mentors/" style="font-size:17px;">Mentors</a></li>
+<li><a href="/aboutus/" style="font-size:17px;">About Us</a></li>
+    <li><a href="/logout/" style="font-size:17px;">Logout</a></li>
   </ul>
 <ul class="side-nav" id="mobile-demo">
-    <li><a href="/home/" style="font-size:20px;">Home</a></li>
-  <li><a class="dropdown-button tt" href="#!" data-activates="dropdown1" style="font-size:20px;">Queries</a></li>
-    <li><a href="/profile/{{request.user.username}}" style="font-size:20px;">Profile</a></li>
-    <li><a href="/community/" style="font-size:20px;">Community</a></li>
-    <li><a href="/mentors/" style="font-size:20px;">Mentors</a></li>
-<li><a href="/aboutus/" style="font-size:20px;">About Us</a></li>
-    <li><a href="/logout/" style="font-size:20px;">Logout</a></li>
+    <li><a href="/home/" style="font-size:17px;">Home</a></li>
+  <li><a class="dropdown-button tt" href="#!" data-activates="dropdown1" style="font-size:17px;">Queries</a></li>
+    <li><a href="/profile/{{request.user.username}}" style="font-size:17px;">Profile</a></li>
+    <li><a href="/community/" style="font-size:17px;">Community</a></li>
+    <li><a href="/mentors/" style="font-size:17px;">Mentors</a></li>
+<li><a href="/aboutus/" style="font-size:17px;">About Us</a></li>
+    <li><a href="/logout/" style="font-size:17px;">Logout</a></li>
   </ul>
 </div>
 </nav>
   <div id="textarea">
+<div class=" fade-in one">
+   <h1 style="font-family: 'Roboto', sans-serif; color:#000;" align="center" >Queries</h1>
+  </div>
+  <div class=" fade-in two">
+   <h5 style="font-family: 'Roboto', sans-serif; color:#000;" align="center" >Got a doubt regarding work related to your organisation or any other organisation? We provide a platform for you to ask them.....</h5>
+  <br><br><br>
 <div class="row">
     <div class="col s1"><img src="{{pu.image.url}}" class="responsive-img" id="id_profilepicture"></div>
     <div class="col s11">
@@ -83,7 +89,7 @@ textarea.materialize-textarea {
     <div class="col s1"><img src="{{query.user.image.url}}" class="responsive-img" id="id_profilepicture"></div>
 <div class="col s11"><div class="card-panel white" style="margin-left:-20px; margin-top:0px;">
 {%if request.user == query.user.user %}  <a href="/editquery/{{query.id}}"><img src="/media/edit.png" class="responsive-img" align="right"></a>{%endif%}
-  <div id="id_name"><span style="font-weight:bold; font-size:18px;">{{query.user.orgname}} </span> posted</div> <br>
+  <div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="#" style="color:#000000;">{{query.user.orgname}}</a> </span> posted</div> <br>
 	<div id="id_body" style="height:auto;">{{query.body}}</div>
         <br><div class="divider"></div>
 	<div id="id_answer"><br>
@@ -104,9 +110,9 @@ textarea.materialize-textarea {
     {%for answer in query.get_answers %}
     <div class="collapsible-body">
     <p>
-    {{answer.body}}
+    <a href="#" style="color:#000000;"><b>{{answer.user.orgname}}</b></a>
     <br>
-    {{answer.user.orgname}}
+<span style="font-family: 'Droid Sans', sans-serif;">{{answer.body}}</span>
     </div>
   </p>
     {%endfor%}
@@ -123,7 +129,7 @@ textarea.materialize-textarea {
 </div>
 </div>
 </div>
-
+</div>
 </body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src={% static "js/materialize.min.js" %}></script>

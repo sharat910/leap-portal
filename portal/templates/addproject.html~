@@ -3,15 +3,21 @@
 <html>
 <head>
   <title>{%block title%}Add Project{%endblock%}</title>
-  </head>
 <style type="text/css">
-.input-field label {
-    color: #000000;}
-.input-field input[type=text]:focus:+label{color:#0d47a1;}
-.input-field input[type=text]:focus:not([readonly])+label{border-bottom: 1px solid #0d47a1;
-     box-shadow: 0 1px 0 0 #0d47a1;
-color:#0d47a1;}
-</style>
+  body{position: absolute;
+	top: 0px;
+	left: -20px;
+	right: 0px;
+	bottom: -50px;
+	width: auto;
+	height: auto;
+	background-image:url(/media/1.jpg);
+	background-size: cover;
+	z-index: 0;
+	}
+  </style>  
+</head>
+
   <body>
     {%block body%}
   <div class="card-panel white " style="width: 65%; position:absolute; top:14%; left: 20%; height:auto;">

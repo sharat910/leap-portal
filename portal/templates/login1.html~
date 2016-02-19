@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/style.css" />
    <style type="text/css">
    body{
-    
+
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -34,6 +34,10 @@
      border-bottom: 1px solid #000;
      box-shadow: 0 1px 0 0 #000;
    }
+.input-field input[type=password]{
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
 
 .input-field input[type=password]:focus + label{
      color: #0d47a1;
@@ -43,7 +47,7 @@
      box-shadow: 0 1px 0 0 #0d47a1;
    }
 .input-field .prefix ~ label {
-    width: calc(100% - 300px - 5.5rem);
+    width: calc(100% - 280px - 5.5rem);
 }
 .input-field .prefix {
     color: #000000;
@@ -67,16 +71,11 @@ background-image:url(/media/connect-world.png)}
     </head>
  <body>
 <div id="container">
-<div class="fixed-action-btn top" style="bottom: 60px; right: 24px;">
-    <a class="btn-floating btn-large blue">
+<div class="fixed-action-btn" style="bottom: 65px; right: 24px;">
+    <a class="btn-floating btn-large blue" href="https://www.facebook.com/YouthConPilani/?ref=br_rs">
       <i class="large material-icons">info_outline</i>
     </a>
-    <ul>
-      <li><a class="btn-floating red"><i class="material-icons">facebook</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-    </ul>
+   
   </div>
 <div id="loginformandimages">
 <div id="introimages"><br>
@@ -85,7 +84,7 @@ background-image:url(/media/connect-world.png)}
 </div>
 <div id="formlogin" align="center" style="padding-top:6%;">
  <div class="card-panel white " style="width: 35%; padding height: auto;">
-   <h4 align="center" style="color:#0d47a1;"> Leap Portal </h4>
+   <h4 align="center" style="color:#0d47a1;"> LEAP Portal </h4>
   <div class="inside" style="padding-top:3%; padding-left: 1%;">
 <form method="POST" class="viewform">{% csrf_token %}
    {% form %}
@@ -96,8 +95,8 @@ background-image:url(/media/connect-world.png)}
    <div style="padding-left:; padding-top: 7%;">
   <button class="btn waves-effect waves-light" type="submit" name="action" style="background-color:#0d47a1;">Login
  </button><br><br>
-<a href="/register" style="color:#0d47a1;">Forgot Password?</a> <br><br> 
-<a href="/register" style="color:#0d47a1;">Click here </a>to register.
+<a href="/changepass/" style="color:#0d47a1;">Forgot Password?</a> <br><br>
+<a href="/register/" style="color:#0d47a1;">Click here </a>to register.
  </div>
 </form>
  </div>
@@ -107,11 +106,10 @@ background-image:url(/media/connect-world.png)}
 
 
  </div>
-</div>
  <footer class="page-foter black">
           <div class="footer-copyright" style="position:absolute; bottom:0; background-color:#fff; width:100%; height:7%; border-top:thick inset #0d47a1;">
             <div class="container" style="padding-top:0.8%;">
-            <span style="color:#0d47a1; font-size:16px;">2016 LEAP</span>
+            <a href="/aboutus/"><span style="color:#0d47a1; font-size:16px;">&copy; 2016 LEAP, BITS Pilani</span></a>
             <span class="blue-text text-darken-4 right">Developers: <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Front-End Designer and Developer" href="https://www.facebook.com/profile.php?id=100007142927829" style="color:#0d47a1;"><u>Prakhar Agarwal</u></a> and  <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Back-End Developer" href="https://www.facebook.com/sharat.chandra.980?fref=ts" style="color:#0d47a1;"><u>Sharat Chandra</u></a></span>
 			</div>
           </div>
