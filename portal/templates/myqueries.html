@@ -162,8 +162,11 @@ function createtask(e){
 
 		},
 		success: function(json){
-			$('#output').html(json.message);
-			window.location.reload(true);
+      $(str2).load(location.href + " " + str2,function(){
+				$('.collapsible').collapsible({
+				    accordion : false
+				});
+			});
 		}
 	});
 }
