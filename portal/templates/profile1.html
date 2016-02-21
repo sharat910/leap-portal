@@ -21,9 +21,10 @@
 {% if pu.fbprofile %}<br>	  <span style="font-weight:bold; font-size:18px;">FB profile:</span> <span style="font-size:18px;"  id="id_fbprofile"> {{pu.fbprofile}}</span>{%endif%}
 
 <br>	  <span style="font-weight:bold; font-size:18px;">E-mail:</span> <span style="font-size:18px;"  id="id_email"> {{pu.email}}</span>
+{% if request.user == pu.user %}
  <div style="position:relative; padding-left:90%;">
   <a class="btn-floating btn-large waves-effect waves-light blue" href="/editprofile/{{pu.user.username}}"><i class="material-icons">mode_edit</i></a>
-      </div>
+</div>{%endif%}
 	  </div>
   </div>
   </div><br>
@@ -48,9 +49,10 @@
       <br><span style="font-weight:lighter; font-size:20px; font-weight:bold;">Attachment:</span> <a href = {{project.details.url}}>Details</a><br>
 
       {% endif %}
+{% if request.user == pu.user %}
 <div style="position:relative; padding-left:90%;">
   <a class="btn-floating btn-large waves-effect waves-light blue" href="/editproject/{{project.id}}"><i class="material-icons">mode_edit</i></a>
-      </div><br>
+      </div><br>{% endif %}
 <div class="divider"></div>
  </p></li>
 </ul>
