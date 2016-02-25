@@ -11,6 +11,7 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css">
   body{background-color:#eee;}
+pre{white-space: pre-wrap;}
   </style>
   </head>
   <body>
@@ -75,8 +76,8 @@
   {%for query in results%}
   <div id = query{{query.id}}>
     <div class="col s1"><img src="{{query.user.image.url}}" class="responsive-img" id="id_profilepicture"></div>
-	<div class="col s11"><div class="card-panel white" style="margin-left:-20px; margin-top:0px;"><div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="#">{{query.user.orgname}}</a> </span> posted</div> <br>
-	<div id="id_body" style="height:auto;">{{query.body}}</div>
+	<div class="col s11"><div class="card-panel white" style="margin-left:-20px; margin-top:0px;"><div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="#" style="color:#000000;">{{query.user.orgname}}</a> </span> posted</div> <br>
+	<div id="id_body" style="height:auto;"><pre>{{query.body}}</pre></div>
      <br><div class="divider"></div>
 
 
@@ -86,7 +87,7 @@
 
 <div class="col s9">
 	<div class = "row">
-	<input id = "body{{query.id}}" type="text" class="validate" placeholder="Answer">
+	<textarea id="body{{query.id}}" class="materialize-textarea" placeholder="Answer" type="text"></textarea>
 <button  id ="{{query.id}}" class="btn waves-effect waves-light"  onclick="createtask(this)" name="action" style="background-color:#0d47a1;">Answer
   </button>	</div>
   <div id = answers{{query.id}}>
@@ -99,9 +100,9 @@
         {%for answer in query.get_answers %}
         <div class="collapsible-body">
         <p>
-        <a href="#"><b>{{answer.user.orgname}}</b></a>
+        <a href="#" style="color: #000000;"><b>{{answer.user.orgname}}</b></a>
         <br>
-        {{answer.body}}
+       <pre style="padding-left:2vw;; margin-top: -2vw;">{{answer.body}}</pre>
         </div>
       </p>
         {%endfor%}
@@ -152,8 +153,11 @@ function createtask(e){
 
 		},
 		success: function(json){
-			$('#output').html(json.message);
-			window.location.reload(true);
+      $(str2).load(location.href + " " + str2,function(){
+				$('.collapsible').collapsible({
+				    accordion : false
+				});
+			});
 		}
 	});
 }

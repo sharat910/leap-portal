@@ -22,7 +22,7 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <link rel="icon" href="/media/fav.png" type="image/png">
 <style type="text/css">
-.gallery{margin-top:-2em;}
+.gallery{margin-top:-3em;}
 	.gallery > div{float:left;
 	margin: 30px;}
 </style>
@@ -60,11 +60,16 @@
 	</style>
 </head>
 <body>
-<h5 style="padding-left:2%;"><a href="/home/">Go back to portal</a></h5>
+
 <div id="fullpage">
 
 <div class="section">
-	<div id="sec1head" class="head">About LEAP</div>
+<div style="position:absolute; top:15px; width: 30vw;">
+<span style="padding-left:2%;">
+	{%if request.user%}<a href="/home/">Go back to portal</a></span>
+	{%else%}<a href="/login/">Go back to portal</a></span>{%endif%}
+</div>	
+<div id="sec1head" class="head">About LEAP</div>
 	<div id="sec1text" class="info">
 		Leading Endeavour to Achieve Progress (LEAP) is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.
 	</div>
@@ -107,78 +112,82 @@
 	<div id="sec1text" class="info">
 <div class="gallery">
 <div>
-<img class="responsive-img" src="/media/leapmembers/aditya.jpg"> 
+<img class="responsive-img" src="/media/leapmembers/aditya.jpg">
 <p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/idealagd?fref=ts" class="head" style="font-size:1.4em; color:black;">Aditya Deshmuk</a><br>
 Convener
  </p>
 </div>
 <div>
-<img class="responsive-img" src="/media/leapmembers/vishal.jpg"> 
+<img class="responsive-img" src="/media/leapmembers/vishal.jpg">
 <p align="center" class="head" style="font-size:22px;"><a href="#" class="head" style="font-size:1.4em; color:black;">Vishal Tripathy</a><br>
 Co-Convener
  </p>
 </div>
 <div>
-<img class="responsive-img" src="/media/leapmembers/mansa.jpg"> 
+<img class="responsive-img" src="/media/leapmembers/mansa.jpg">
 <p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/mansa.kedia" class="head" style="font-size:1.4em; color:black;">Mansa Kedia</a><br>
 Co-Convener
  </p>
 </div>
 <div>
-<img class="responsive-img" src="/media/leapmembers/abhishek.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/abhishek.singh.5074644?fref=ts" class="head" style="font-size:1.3em; color:black;">Abhishek Singh</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/aviral.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/aviral.gupta.735?fref=ts" class="head" style="font-size:1.3em; color:black;">Aviral Gupta</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/janesh.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/janeshsingla" class="head" style="font-size:1.3em; color:black;">Janesh Singla</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/mohit.JPG"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/ankit.raj.54943?fref=ts" class="head" style="font-size:1.3em; color:black;">Mohit Gupta</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/manan.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/manan.singhal30" class="head" style="font-size:1.3em; color:black;">Manan Singhal</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/naresh.JPG"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/ntetarwal?fref=ts" class="head" style="font-size:1.3em; color:black;">Naresh Tetarwal</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/saima.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/profile.php?id=100009794418996" class="head" style="font-size:1.3em; color:black;">Saima Rashid</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/shashwat.jpg"> 
-<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/shashwat.jha.338?fref=ts" class="head" style="font-size:1.3em; color:black;">Shashwat Shivam Jha</a><br>
- </p>
-</div>
-<div>
-<img class="responsive-img" src="/media/leapmembers/shubham.jpg"> 
+<img class="responsive-img" src="/media/leapmembers/shubham.jpg">
 <p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/shub4u" class="head" style="font-size:1.3em; color:black;">Shubham Agarwal</a><br>
  </p>
 </div>
 <div>
-<img class="responsive-img" src="/media/leapmembers/sharat.jpg"> 
+<img class="responsive-img" src="/media/leapmembers/janesh.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/janeshsingla" class="head" style="font-size:1.3em; color:black;">Janesh Singla</a><br>
+ </p>
+</div>
+<div>
+<img class="responsive-img" src="/media/leapmembers/naresh.JPG">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/ntetarwal?fref=ts" class="head" style="font-size:1.3em; color:black;">Naresh Tetarwal</a><br>
+ </p>
+</div>
+<div>
+<img class="responsive-img" src="/media/leapmembers/abhishek.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/abhishek.singh.5074644?fref=ts" class="head" style="font-size:1.3em; color:black;">Abhishek Singh</a><br>
+ </p>
+</div>
+<div>
+<img class="responsive-img" src="/media/leapmembers/aviral.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/aviral.gupta.735?fref=ts" class="head" style="font-size:1.3em; color:black;">Aviral Gupta</a><br>
+ </p>
+</div>
+
+<div>
+<img class="responsive-img" src="/media/leapmembers/mohit.JPG">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/ankit.raj.54943?fref=ts" class="head" style="font-size:1.3em; color:black;">Mohit Gupta</a><br>
+ </p>
+</div>
+<div>
+<img class="responsive-img" src="/media/leapmembers/manan.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/manan.singhal30" class="head" style="font-size:1.3em; color:black;">Manan Singhal</a><br>
+ </p>
+</div>
+
+
+<div>
+<img class="responsive-img" src="/media/leapmembers/shashwat.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/shashwat.jha.338?fref=ts" class="head" style="font-size:1.3em; color:black;">Shashwat Shivam Jha</a><br>
+ </p>
+</div>
+
+<div>
+<img class="responsive-img" src="/media/leapmembers/sharat.jpg">
 <p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/sharat.chandra.980?fref=ts" class="head" style="font-size:1.3em; color:black;">Sharat Chandra</a><br>
 Backend Developer
  </p>
 </div>
 <div>
-<img class="responsive-img" src="/media/leapmembers/prakhar.JPG"> 
+<img class="responsive-img" src="/media/leapmembers/prakhar.png" style="height:300px; width:300px;" >
 <p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/profile.php?id=100007142927829" class="head" style="font-size:1.3em; color:black;">Prakhar Agarwal</a><br>
 Frontend Developer
+ </p>
+</div>
+<div>
+<img class="responsive-img" src="/media/leapmembers/saima.jpg">
+<p align="center" class="head" style="font-size:22px;"><a href="https://www.facebook.com/profile.php?id=100009794418996" class="head" style="font-size:1.3em; color:black;">Saima Rashid</a><br>
  </p>
 </div>
 </div>

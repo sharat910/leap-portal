@@ -66,13 +66,13 @@
 	background-size: cover;
 	z-index: 0;
 	background-repeat:no-repeat;
-background-image:url(/media/connect-world.png)}
+background-image:url(/media/bg.png)}
   </style>
     </head>
  <body>
 <div id="container">
 <div class="fixed-action-btn" style="bottom: 65px; right: 24px;">
-    <a class="btn-floating btn-large blue" href="https://www.facebook.com/YouthConPilani/?ref=br_rs">
+    <a class="btn-floating btn-large blue" href="/aboutus/">
       <i class="large material-icons">info_outline</i>
     </a>
    
@@ -83,8 +83,8 @@ background-image:url(/media/connect-world.png)}
   <img src="/media/logo.png" class="responsive-img" align="right" style="margin:10px;">
 </div>
 <div id="formlogin" align="center" style="padding-top:6%;">
- <div class="card-panel white " style="width: 35%; padding height: auto;">
-   <h4 align="center" style="color:#0d47a1;"> LEAP Portal </h4>
+ <div class="card-panel white " style="width: 40%; height: auto;">
+   <h4 align="center" style="color:#0d47a1;"> SOCIO CONNECT </h4>
   <div class="inside" style="padding-top:3%; padding-left: 1%;">
 <form method="POST" class="viewform">{% csrf_token %}
    {% form %}

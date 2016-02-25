@@ -328,9 +328,19 @@ def MentorView(request):
 def AboutusView(request):
 	return render_to_response('about.html')
 
+@login_required
+def CommunityView(request):
+	pu = Puser.objects.all()
+	context ={'pu': pu}
+	return render_to_response('community.html',context,context_instance  = RequestContext(request))
+
+@login_required
+def HelpView(request):
+	return render_to_response('help.html')
 
 ##EDIT VIEWS
 
+@login_required
 def EditPostView(request,id):
 	post = get_object_or_404(Post,pk = id)
 	if request.user == post.user.user:
@@ -348,6 +358,7 @@ def EditPostView(request,id):
 	else:
 		return render_to_response('sorry.html')
 
+@login_required
 def EditQueryView(request,id):
 	query = get_object_or_404(Query,pk = id)
 	if request.user == query.user.user:
@@ -365,6 +376,7 @@ def EditQueryView(request,id):
 	else:
 		return render_to_response('sorry.html')
 
+@login_required
 def EditProfileView(request,username):
 	u = User.objects.get(username = username)
 	pu = Puser.objects.get(user = u)
@@ -383,6 +395,7 @@ def EditProfileView(request,username):
 	else:
 		return render_to_response('sorry.html')
 
+@login_required
 def EditEventView(request,id):
 	event = get_object_or_404(Event,pk = id)
 	if request.user == event.user.user:
@@ -400,6 +413,7 @@ def EditEventView(request,id):
 	else:
 		return render_to_response('sorry.html')
 
+@login_required
 def EditProjectView(request,id):
 	project = get_object_or_404(Project,pk = id)
 	if request.user == project.user.user:
@@ -417,6 +431,7 @@ def EditProjectView(request,id):
 	else:
 		return render_to_response('sorry.html')
 
+@login_required
 def EditAlumniView(request,id):
 	alumnus = get_object_or_404(Alumni,pk = id)
 	if request.user == alumnus.user.user:
@@ -435,6 +450,7 @@ def EditAlumniView(request,id):
 		return render_to_response('sorry.html')
 
 
+@login_required
 def EditMediaView(request,id):
 	media = get_object_or_404(Media,pk = id)
 	if request.user == media.user.user:
@@ -452,7 +468,41 @@ def EditMediaView(request,id):
 	else:
 		return render_to_response('sorry.html')
 
-def CommunityView(request):
-	pu = Puser.objects.all()
-	context ={'pu': pu}
-	return render_to_response('community.html',context,context_instance  = RequestContext(request))
+
+#DELETE VIEWS
+
+@login_required
+def DeleteProjectView(request,id):
+	project = get_object_or_404(Project,pk = id)
+	if request.user == project.user.user:
+		project.delete()
+		return HttpResponseRedirect('/profile/'+str(request.user))
+	else:
+		return render_to_response('sorry.html')
+
+@login_required
+def DeleteEventView(request,id):
+	event = get_object_or_404(Event,pk = id)
+	if request.user == event.user.user:
+		event.delete()
+		return HttpResponseRedirect('/profile/'+str(request.user))
+	else:
+		return render_to_response('sorry.html')
+
+@login_required
+def DeleteAlumniView(request,id):
+	alumnus = get_object_or_404(Alumni,pk = id)
+	if request.user == alumnus.user.user:
+		alumnus.delete()
+		return HttpResponseRedirect('/profile/'+str(request.user))
+	else:
+		return render_to_response('sorry.html')
+
+@login_required
+def DeleteMediaView(request,id):
+	media = get_object_or_404(Media,pk = id)
+	if request.user == media.user.user:
+		media.delete()
+		return HttpResponseRedirect('/profile/'+str(request.user))
+	else:
+		return render_to_response('sorry.html')

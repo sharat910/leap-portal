@@ -46,6 +46,11 @@ urlpatterns = patterns('portal.views',
     url(r'^editproject/(?P<id>\d+)$','EditProjectView'),
     url(r'^editalumni/(?P<id>\d+)$','EditAlumniView'),
     url(r'^editmedia/(?P<id>\d+)$','EditMediaView'),
+    url(r'^deleteevent/(?P<id>\d+)$','DeleteEventView'),
+    url(r'^deleteproject/(?P<id>\d+)$','DeleteProjectView'),
+    url(r'^deletealumni/(?P<id>\d+)$','DeleteAlumniView'),
+    url(r'^deletemedia/(?P<id>\d+)$','DeleteMediaView'),
+    url(r'^help/$','HelpView'),
     url(r'^aboutus/$','AboutusView'),
 
 

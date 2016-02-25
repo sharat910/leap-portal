@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import *
 from material import *
+from django.utils.translation import ugettext_lazy as _
 
 class RegistrationForm(ModelForm):
 	username = forms.CharField(label = (u'Username'))
@@ -10,7 +11,16 @@ class RegistrationForm(ModelForm):
 
 	class Meta:
 		model = Puser
-		exclude = ('user','joineddate','designation')
+		exclude = ('user','joineddate','designation',)
+		labels = {
+            'orgname': _('Organisation Name'),
+			'email': _('Email'),
+			'weblink': _('Link to your Website'),
+			'fbprofile':_('Link to your Facebook Page'),
+			'image': _('Logo/DP')
+        }
+
+
 
 	def clean_username(self):
 		username = self.cleaned_data['username']
@@ -27,6 +37,7 @@ class RegistrationForm(ModelForm):
 		return password
 
 class PuserForm(ModelForm):
+
 	class Meta:
 		model = Puser
 		exclude = ('user','joineddate','designation',)
@@ -45,7 +56,7 @@ class PassForm(forms.Form):
 	layout = Layout('username','password')
 
 class PostForm(forms.ModelForm):
-	body = forms.CharField(label=(u'Post'), required = True,widget=forms.Textarea)
+	body = forms.CharField(label=(u'Post something happening!'), required = True,widget=forms.Textarea)
 
 	class Meta:
 		model = Post
@@ -57,7 +68,7 @@ class PostForm(forms.ModelForm):
 
 
 class QueryForm(forms.ModelForm):
-	body = forms.CharField(label=(u'Query'), required = True,widget=forms.Textarea)
+	body = forms.CharField(label=(u'Got a question, shoot it!'), required = True,widget=forms.Textarea)
 
 
 	class Meta:
@@ -81,16 +92,28 @@ class EventForm(forms.ModelForm):
 	class Meta:
 		model = Event
 		exclude = ('user',)
+		labels = {
+            'name': _('Name of the Event'),
+			'details': _('Attach related document in pdf, docx or doc format'),
+		}
 
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Project
 		exclude = ('user',)
+		labels = {
+            'name': _('Name of the Project'),
+			'details': _('Attach related document in pdf, docx or doc format'),
+		}
 
 class AlumniForm(forms.ModelForm):
 	class Meta:
 		model = Alumni
 		exclude = ('user',)
+		labels = {
+            'name': _('Name of the Alumnus'),
+			'about': _('About Him/Her'),
+		}
 
 class MediaForm(forms.ModelForm):
 	class Meta:
