@@ -79,6 +79,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'leap.wsgi.application'
 
+EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'bits@123' #my gmail password
+EMAIL_HOST_USER = 'leapbits@gmail.com' #my gmail username
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = 'leapbits@gmail.com'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

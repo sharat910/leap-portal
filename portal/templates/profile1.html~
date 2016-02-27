@@ -19,14 +19,17 @@ pre{white-space: pre-wrap;}
     <div class=" fade-in one"><br><br>
  <div class="card-panel white">
  <div class="row">
-      <div class="col s3" style="padding-top:3%;"><img src="{{pu.image.url}}" class="responsive-img" style="max-height:200px; border:solid 2px #fff;""></div>
+      <div class="col s3" style="padding-top:3%;"><img src="{{pu.image.url}}" class="responsive-img" style="max-height:200px; border:solid 2px #fff;"></div>
       <div class="col s9" style="padding-left:4%;"><p style="font-size:27px; font-weight:bold; font-family: 'Raleway', sans-serif;" id="id_name">{{pu.orgname}}<br></p>
 	  </span> <span style="font-size:20px; font-family: 'Raleway', sans-serif;"  id="id_institutionname">{{pu.institution}}</span>
 <br>	  <div class="row" style="margin-left:-1vw; margin-top:0.5vw;"><div class="col s0.1"><i class="material-icons">location_on</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> {{pu.location}}</span></div></div>
 	  <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">phone</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> {{pu.contact}}</span></div></div>
-{% if pu.weblink %}	  <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">language</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> {{pu.weblink}}</span></div></div>{%endif%}
-{% if pu.fbprofile %}	 <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">person_pin</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> {{pu.fbprofile}}</span></div></div>{%endif%}
+{% if pu.weblink %}	  <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">language</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> <a href="{{pu.weblink}}" style="color:#000;">{{pu.weblink}}</a></span></div></div>{%endif%}
+{% if pu.fbprofile %}	 <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">person_pin</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location">
+  <a href="{{pu.fbprofile}}" style="color:#000;">{{pu.fbprofile}}</a></span></div></div>{%endif%}
    <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">email</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"> {{pu.email}}</span></div></div>
+{% if pu.introduction %}   <div class="row" style="margin-left:-1vw;"><div class="col s0.1"><i class="material-icons">comment</i></div><div class="col s9" style="margin-left:-1vw;"> <span style="font-size:16px; font-family: 'Raleway', sans-serif; font-weight:light;"  id="id_location"><a href = "{{pu.introduction.url}}">Introductory Presentation</a> </span></div></div>{% endif %}
+
 {% if request.user == pu.user %}
  <div style="position:relative; padding-left:90%;">
   <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Profile" href="/editprofile/{{pu.user.username}}"><i class="material-icons">mode_edit</i></a>
@@ -60,7 +63,7 @@ pre{white-space: pre-wrap;}
   <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Project" href="/editproject/{{project.id}}"><i class="material-icons">mode_edit</i></a>
 
       </div>
-<a class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Project"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>{% endif %}
+<a href = "/deleteproject/{{project.id}}" class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Project" onclick="myFunction()"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>{% endif %}
 <div class="divider"></div>
  </p></li>
 </ul>
@@ -98,7 +101,7 @@ pre{white-space: pre-wrap;}
   <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Event" href="/editevent/{{event.id}}"><i class="material-icons">mode_edit</i></a>
 
       </div>
-<a class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Event"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>{% endif %}
+<a href = "/deleteevent/{{event.id}}" class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Event"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>{% endif %}
  <div class="divider"></div><br>
 {%endfor%}
   {% if request.user == pu.user %}<a href="/addevent/" style="font-size:15px; color:#0d47a1;">Add Event</a>{% endif %}
@@ -108,7 +111,7 @@ pre{white-space: pre-wrap;}
   {% if request.user == pu.user %}
  <div class="card-panel white">
   <a href="/addevent/" style="font-size:15px; color:#0d47a1;">Add Event</a>
-</div>  
+</div>
 {% endif %}
 {%endif%}
 <br>
@@ -127,7 +130,7 @@ pre{white-space: pre-wrap;}
 <div style="position:relative; padding-left:90%;">
   <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Alumni" href="/editalumnus/{{alumnus.id}}"><i class="material-icons">mode_edit</i></a>
       </div>
-<a class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Alumni"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>
+<a href = "/deletealumni/{{a.id}}" class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Alumni"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>
 <div class="divider"></div>{% endif %}
 {%endfor%}<br>
 {% if request.user == pu.user %}<a href="/addalumnus/" style="font-size:15px; color:#0d47a1;">Add Alumnus</a>{% endif %}
@@ -162,9 +165,9 @@ pre{white-space: pre-wrap;}
   <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Media" href="/editproject/{{project.id}}"><i class="material-icons">mode_edit</i></a>
 
       </div>
-<a class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Media"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br>{% endif %}
+<a href = "/deletemedia/{{med.id}}" class="bn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Media"><img src="/media/del.png" class="responsive-img" align="left" style="margin-top: -1vw;"></a><br><div class="divider"></div>{% endif %}
 {%endfor%}
-{% if request.user == pu.user %}<a href="/addmedia/" style="font-size:15px; color:#0d47a1;">Add Media Publications</a>{% endif %}
+{% if request.user == pu.user %}<br><a href="/addmedia/" style="font-size:15px; color:#0d47a1;">Add Media Publications</a>{% endif %}
 </div>
 </div>
 {% else %}
@@ -185,6 +188,9 @@ pre{white-space: pre-wrap;}
     {% endblock %}
 </body>
   <script type="text/javascript">
+function myFunction() {
+    alert("Are you sure you want to delete this item?");
+}
   </script>
   <script>
 

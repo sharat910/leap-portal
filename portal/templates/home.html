@@ -65,7 +65,7 @@ pre{white-space: pre-wrap;}
 <li><a href="/aboutus/" style="font-size:17px;">About Us</a></li>
     <li><a href="/logout/" style="font-size:17px;">Logout</a></li>
   </ul
-</div>
+></div>
 </nav>
   <div id="textarea">
 
@@ -90,7 +90,8 @@ pre{white-space: pre-wrap;}
     <div class="col s1"><img src="{{post.user.image.url}}" class="responsive-img" id="id_profilepicture"></div>
 	<div class="col s11"><div class="card-panel white" style="margin-left:-20px; margin-top:0px;">
 {%if request.user == post.user.user %}<a href="/editpost/{{post.id}}"><img src="/media/edit.png" class="responsive-img" align="right"></a>{%endif%}
-<div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="/profile/{{post.user.user}}" style="color:#000000;">{{post.user.orgname}}</a> </span> posted</div> <br>
+<div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="/profile/{{post.user.user}}" style="color:#000000;">{{post.user.orgname}}</a> </span> posted <br>
+<span style="font-size: 8px; font-weight:light;">at <span id="time">{{post.created}}</span></div> <br>
 	<div id="id_body" style="height:auto; font-family: 'Droid Sans', sans-serif; margin-right:30px;"><pre>{{post.body}}</pre></div>
      <br><div class="divider"></div>
 	<div id="id_comment"><br>

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .validators import validate_file_extension
+from .validators import validate_file_extension, validate_file_extension_intro 
 # Create your models here.
 
 class Puser(models.Model):
@@ -12,9 +12,11 @@ class Puser(models.Model):
 	location = models.CharField(max_length=100)
 	#designation = models.CharField(max_length=200,blank = True,null = True)
 	institution = models.CharField(max_length=200)
-	contact = models.IntegerField(blank=True, null=True)
+	contact = models.IntegerField()
 	weblink = models.CharField(max_length=200,null = True,blank = True)
 	fbprofile = models.CharField(max_length=200,null = True,blank = True)
+	introduction = models.FileField(upload_to='intros/',	validators = [validate_file_extension_intro],null = True ,blank=True)
+
 
 
 	def __unicode__(self):
@@ -94,7 +96,7 @@ class Project(models.Model):
 	user = models.ForeignKey(Puser)
 	teamstrength = models.IntegerField()
 	workingarea = models.CharField(max_length=200)
-	achievements = models.TextField()
+	achievements = models.TextField(null = True, blank = True)
 	details = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension],null = True,blank=True)
 	created = models.DateTimeField(auto_now_add=True)
 

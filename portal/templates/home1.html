@@ -67,7 +67,7 @@ pre{white-space: pre-wrap;}
    <h1 style="font-family: 'Roboto', sans-serif; color:#000;" align="center" >Queries</h1>
   </div>
   <div class=" fade-in two">
-   <h5 style="font-family: 'Roboto', sans-serif; color:#000;" align="center" >Got a doubt regarding work related to your organisation or any other organisation? We provide a platform for you to ask them</h5>
+   <h5 style="font-family: 'Roboto', sans-serif; color:#000;" align="center">Stuck in a problem regarding your initiative?<br> Here is a one stop solution for all your doubts.</h5>
   <br><br><br>
 <div class="row">
     <div class="col s1"><img src="{{pu.image.url}}" class="responsive-img" id="id_profilepicture"></div>
@@ -91,6 +91,7 @@ pre{white-space: pre-wrap;}
 <div class="col s11"><div class="card-panel white" style="margin-left:-20px; margin-top:0px;">
 {%if request.user == query.user.user %}  <a href="/editquery/{{query.id}}"><img src="/media/edit.png" class="responsive-img" align="right"></a>{%endif%}
   <div id="id_name"><span style="font-weight:bold; font-size:18px;"><a href="/profile/{{query.user.user}}" style="color:#000000;">{{query.user.orgname}}</a> </span> posted</div> <br>
+  <span style="font-size: 8px; font-weight:light;">at <span id="time">{{query.created}}</span></div> <br>
 	<div id="id_body" style="height:auto;"><pre>{{query.body}}</pre></div>
         <br><div class="divider"></div>
 	<div id="id_answer"><br>

@@ -17,7 +17,8 @@ class RegistrationForm(ModelForm):
 			'email': _('Email'),
 			'weblink': _('Link to your Website'),
 			'fbprofile':_('Link to your Facebook Page'),
-			'image': _('Logo/DP')
+			'image': _('Logo/DP'),
+			'introduction': _('Introductory Presentation')
         }
 
 
@@ -36,11 +37,30 @@ class RegistrationForm(ModelForm):
 		password = self.cleaned_data['password']
 		return password
 
-class PuserForm(ModelForm):
+class UpdateForm(ModelForm):
+	password = forms.CharField(label = (u'Update Password'),required = False, widget = forms.PasswordInput(render_value = False))
 
 	class Meta:
 		model = Puser
 		exclude = ('user','joineddate','designation',)
+		labels = {
+            'orgname': _('Organisation Name'),
+			'email': _('Email'),
+			'weblink': _('Link to your Website'),
+			'fbprofile':_('Link to your Facebook Page'),
+			'image': _('Logo/DP'),
+			'introduction': _('Introductory Presentation')
+        }
+
+	def clean_password(self):
+		password = self.cleaned_data['password']
+		return password
+
+class PuserForm(ModelForm):
+
+	class Meta:
+		model = Puser
+		exclude = ('joineddate','designation',)
 
 
 class LoginForm(forms.Form):

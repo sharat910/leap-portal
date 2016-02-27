@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.db.models import Q
 from django.core.exceptions import SuspiciousOperation
+from django.core.mail import EmailMessage
 
 # Create your views here.
 
@@ -29,6 +30,10 @@ def PuserRegistration(request):
 						 #designation = form.cleaned_data['designation'],
 						 location=form.cleaned_data['location'],
 						 institution = form.cleaned_data['institution'],
+						 contact = form.cleaned_data['contact'],
+						 weblink = form.cleaned_data['weblink'],
+						 fbprofile = form.cleaned_data['fbprofile'],
+						 introduction = request.FILES.get('introduction', False),
 						)
 			stu.save()
 			return HttpResponseRedirect('/login/')
@@ -133,6 +138,10 @@ def AnswerView(request):
 		query = Query.objects.get(pk = queryid)
 		answer = Answer(body = body,query = query,user = pu)
 		answer.save()
+		print "before email"
+		email = EmailMessage(str(answer.user.orgname) + ' answered your query', 'Query : ' + str(query.body) +"\n\n" + 'Answer : '+ str(answer.body), to=[str(query.user.email)])
+	 	email.send()
+		print "email sent"
 	response_data = {}
 	try:
 		response_data['message'] = str(body)
@@ -336,6 +345,11 @@ def CommunityView(request):
 
 @login_required
 def HelpView(request):
+	# print 1
+	# email = EmailMessage('head', 'Body', to=['sharat910@gmail.com'])
+	# print 2
+	# email.send()
+	# print "email sent"
 	return render_to_response('help.html')
 
 ##EDIT VIEWS
@@ -381,11 +395,15 @@ def EditProfileView(request,username):
 	u = User.objects.get(username = username)
 	pu = Puser.objects.get(user = u)
 	if request.user == pu.user:
-		form = PuserForm(request.POST or None,request.FILES or None,instance = pu)
+		form = UpdateForm(request.POST or None,request.FILES or None,instance = pu)
 		if form.is_valid():
 			form.save()
-			print "edit query saved"
-			return HttpResponseRedirect('/profile/' +  u.username)
+			if form.cleaned_data['password']:
+				user = request.user
+				user.set_password(form.cleaned_data['password'])
+				user.save()
+				return HttpResponseRedirect('/login/')
+			return HttpResponseRedirect('/profile/' +  request.user.username)
 
 		context = {
 		'pu':pu,
